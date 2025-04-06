@@ -28,6 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Settings for tailwind integration
+TAILWIND_APP_NAME = 'theme'
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,6 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # custome apps,
+    'bmg',
+    # third-party apps,
+    'tailwind',
+    'theme',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,328 @@
+{% load static %}
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Moon Global Services</title>
+		<!--<script src="https://cdn.tailwindcss.com"></script>-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+		<!-- <link rel="stylesheet" href="{% static 'css/tailwind_out.css' %}" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_css %}
+    <style>
+        @keyframes carouselAnim {
+            0% {
+                opacity: 0.5;
+            } 
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes textAnim {
+            0% {
+                opacity: 0;
+                transform: scale(.5);
+            } 
+            100% {
+                opacity: 1;
+                transform: scale(1.4);
+            }
+        }
+        .carousel-image {
+            display: none;
+        }
+        .carousel-image.active {
+            display: block;
+        }
+        .carousel-image, .property-image {
+            transition: display 1s ease-in-out;
+        }
+        .active {
+            animation-name:carouselAnim;
+            animation-duration: 1.5s;
+            animation-timing-function: ease-in;
+
+        }
+        #motto {
+            animation-name: textAnim;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+    </style>
+</head>
+<body class="bg-blue-100">
+
+    <!-- Navbar -->
+    <nav class="bg-white text-blue-500 p-4 pb-2 border-b-8 border-solid border-blue-600">
+        <div class="container mx-auto md:fle justify-betwee items-cente">
+            <div class="text-center pl-4">
+                
+                <div class="inline-block relative mx-auto text-center">
+                    <h1 class="text-xl md:text-2xl lg:text-3xl font-black text-center ">Bluemoon Global Services Limited</h1>
+                    <div class="flex justify-center items-center spac-x-4 italic font-serif text-sm md:text-base pl-2 md:pl-4">
+                        <span>Real Estate</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
+                        <span>Investment</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
+                        <span>Logistics</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
+                        <span>Supplies</span>
+
+                    </div>
+                    <span class="absolute right-full top-0 inline-block circle-vary h-14 w-14 lg:h-16 lg:w-16 bg-blue-600 text-white font-bold text-base lg:text-lg"><img src="{% static 'bmg_logo.png' %}" alt=""></span>
+                </div>
+
+            </div>
+            
+            <ul class="hidde flex space-x-3 md:space-x-6 lg:space-x-12 justify-center font-bold text-sm md:text-base pt-2 md:pt-3">
+							<!--<li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Home</a></li>-->
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap">About Us</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Services</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">News</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">FAQs</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap">Contact Us</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Background Image Carousel -->
+    <div class="relative h-[400px] md:h-[500px]">
+        <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-45 text-white text-center p-6 z-40">
+            <div class="text-4xl font-black" id="motto">
+							<p>Building Dreams</p>
+							<p class="py-3">And</p>
+							<p>Creating Legacies</p>
+						</div>
+        </div>
+        <div class="carousel relative h-full w-full">
+            <!-- <img src="{% static 'images/property1.jpg' %}" class="carousel-image absolute inset-0 w-full h-full object-cover active" alt="Property 1">
+            <img src="{% static 'images/property2.jpg' %}" class="carousel-image absolute inset-0 w-full h-full object-cover" alt="Property 2">
+            <img src="{% static 'images/property3.jpg' %}" class="carousel-image absolute inset-0 w-full h-full object-cover" alt="Property 3">
+             -->
+            {% for image in all_properties %}
+            <img src="{% static 'bluemoon_images/' %}{{image}}.jpg" class="carousel-image absolute inset-0 w-full h-full object-cover {% if forloop.first %}active{% endif %}" alt="Property {{forloop.counter}}">
+            {% endfor %}
+              
+        </div>
+    </div>
+
+    <!-- What we do -->
+    <section class="container mx-auto py-12">
+        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">Who We Are</h2>
+        <div class="px-4 lg:px-8">
+            <div class="bg-gradient-to-br from-blue-600 to-blue-900 text-white text-lg md:text-xl p-5 shadow-lg rounded-lg">
+                <p class="pb-2"><span class="font-black">Bluemoon Global Services Limited</span> is a diversified company committed to excellence, 
+                    innovation, and reliability across multiple industries. With a strong foundation in real estate, 
+                    investment, logistics, and supplies, we provide top-tier services that cater to the evolving needs of our clients.
+                </p>
+                <p>At <span class="font-black">Bluemoon Global Services Limited</span>, we are driven by our mission to build dreams, create legacies, and deliver 
+                    exceptional value in every sector we operate in.
+                </p>
+            </div>
+        </div>
+        
+    </section>
+
+		<div class="w-3/4 lg:w-3/5 mx-auto">
+			<p class="border-b border-dashed border-gray-400"></p>
+		</div>
+
+    <!-- What we do -->
+     <section class="container mx-auto py-12">
+        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">What We Do</h2>
+        <div class="grid md:grid-cols-2 lg:gri-cols-3 gap-6 px-4 lg:px-8">
+            <div class="bg-gradient-to-bl from-blue-600 to-blue-900 text-white p-4 shadow-lg rounded-lg">
+                <p class=" text-xl md:text-2xl font-black pb-2 flex space-x-3"><span>&gt;&gt;</span> <span>Real Estate Development and Management</span></p>
+                <p class="text-lg md:text-xl">We specialize in residential, commercial, and luxury properties, offering development, 
+                    sales, leasing, and property management services. Our flagship project, <span class="font-black italic">Blue Moon Gardens</span>, 
+                    is a testament to our commitment to quality and sustainability.
+                </p>
+            </div>
+
+            <div class="text-white bg-gradient-to-br from-blue-600 to-blue-900 p-4 shadow-lg rounded-lg">
+                <p class=" text-xl md:text-2xl font-black pb-2 flex space-x-3"><span>&gt;&gt;</span> <span>Investment Services</span></p>
+                <p class="text-lg md:text-xl">We identify and develop high-yield investment opportunities in various sectors, 
+                    helping clients maximize returns through strategic wealth-building solutions.
+                </p>
+            </div>
+
+            <div class="text-white bg-gradient-to-tr from-blue-600 to-blue-900  p-4 shadow-lg rounded-lg">
+                <p class=" text-xl md:text-2xl font-black pb-2 flex space-x-3"><span>&gt;&gt;</span> <span>Logistics and Transportation</span></p>
+                <p class="text-lg md:text-xl">We offer efficient and reliable logistics solutions, 
+                    ensuring smooth movement of goods and services across different regions with speed, security, and professionalism.
+                </p>
+            </div>
+
+            <div class="bg-gradient-to-tl from-blue-600 to-blue-900  text-white p-4 shadow-lg rounded-lg">
+                <p class=" text-xl md:text-2xl font-black pb-2 flex space-x-3"><span>&gt;&gt;</span> <span>General Supplies and Procurement</span></p>
+                <p class="text-lg md:text-xl">We provide high-quality goods and services, catering to diverse industries with a focus on efficiency, 
+                    cost-effectiveness, and customer satisfaction.
+                </p>
+
+
+            </div>
+
+        </div>
+
+     </section>
+
+		<div class="px-8 md:px-12">
+			<p class="border-b border-dashed border-gray-400"></p>
+		</div>
+
+    <!-- Property Listings -->
+    <section class="container mx-auto py-12">
+        <h2 class="text-3xl font-black text-center mb-6 text-blue-600">Available Properties</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for property in properties.values %}
+                <div class="bg-white p-4 shadow-lg rounded-lg">
+                    <div class="relative overflow-hidden">
+                        <div class="property-carousel h-64 w-full relative text-center" id="p{{forloop.counter}}" value="3">
+                          <input type="hidden" name="" value="1" id="curr-{{forloop.counter}}">
+													<input type="hidden" name="" value="{{property.images|length}}" id="total-{{forloop.counter}}">
+                            <button onclick="showCarousel('{{forloop.counter}}','prev')" value="0" id="prev-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 left-6 top-1/2 z-40 -translate-y-1/2 hidden bg-opacity-50"><i  class="fa-solid fa-arrow-left px-2 text-xl"></i></button>
+                            <button onclick="showCarousel('{{forloop.counter}}', 'next')" value="2" id="next-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 right-6 top-1/2 -translate-y-1/2 z-40 bg-opacity-50"><i  class="fa-solid fa-arrow-right px-2 text-xl"></i></button>
+                            {% for img in property.images %}
+                                <img src="{% static 'bluemoon_images/' %}{{img}}.jpg" class="property-image absolute inset-0 w-full h-full object-cover {% if forloop.first %}{% else %}hidden{% endif %}" alt="{{ img }}" id="img-{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- <h3 class="text-xl font-semibold mt-4">{{ property.title }}</h3>
+                    <p class="text-gray-600">{{ property.description|truncatewords:20 }}</p> -->
+                    <h3 class="text-xl font-semibold mt-4">Title of Property {{forloop.counter}}</h3>
+                    <p class="text-gray-600 py-1">Detailed information about the Property will be placed here</p>
+                    <p class="text-lg lg:text-xl font-bold text-blue-600">Price : $20,000</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+		<div class="px-8 md:px-12">
+			<p class="border-b border-dashed border-gray-400"></p>
+		</div>
+
+    <!-- News Updates -->
+    <section class="py-12">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-6 text-blue-600">Latest News</h2>
+            {% for news in news_list %}
+                <div class="bg-white p-4 shadow-md rounded-lg mb-4">
+									<div class="flex space-x-3">
+										<span class="relative top-2"><span class="circle-vary h-3 w-3 bg-blue-600"></span></span>
+										<div>
+											
+                    <h3 class="text-lg lg:text-xl font-semibold">{{ news }}</h3>
+                    <p class="text-gray-600 text-base lg:text-lg">Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                      Quo commodi doloremque illum repudiandae, excepturi ratione nisi aperiam quaerat 
+                      praesentium impedit quibusdam ex voluptatum facilis non pariatur at corporis mollitia 
+                      cum aliquid! Rem nisi magnam nesciunt repudiandae! Rerum labore necessitatibus recusandae 
+                      accusantium earum, dolorum et in dolores, officiis quisquam excepturi modi.
+                    </p>
+                    <a href="" class="text-blue-600 hover:underline">Read More</a>
+										</div>
+									</div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+		<div class="px-8 md:px-12">
+			<p class="border-b border-dashed border-gray-400"></p>
+		</div>
+
+        <!-- Contact Form -->
+        <section class="container mx-auto py-12">
+            <h2 class="text-2xl font-bold text-center mb-6 text-blue-600">Want to Make an Enquiry ?</h2>
+            <form class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto">
+                <input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4">
+                <input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4">
+                <input type="text" placeholder="Phone Number (optional)" class="w-full p-2 border rounded mb-4">
+                <textarea placeholder="Please type your Enquiry here ..." class="w-full p-2 border rounded mb-4"></textarea>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Submit</button>
+            </form>
+        </section>
+
+    
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white text-center py-12 px-4 mt-16">
+        <p>Copyright &copy; 2025 Bluemoon Global Services Limited. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Hero Image Carousel
+        let heroImages = document.querySelectorAll('.carousel-image');
+        let index = 0;
+        function toggleHeroImages() {
+            heroImages[index].classList.remove('active');
+            index = (index + 1) % heroImages.length;
+            heroImages[index].classList.add('active');
+        }
+        setInterval(toggleHeroImages, 6000);
+
+        // Property Image Carousel
+        /*
+        //document.addEventListener("DOMContentLoaded", function() {
+          document.querySelectorAll('.property-carousel').forEach(carousel => {
+              let images = carousel.querySelectorAll('.property-image');
+              let i = 0;
+              function togglePropertyImages() {
+                  images[i].classList.remove('active');
+                  //alert(i)
+                  i = (i + 1) % images.length;
+                  images[i].classList.add('active');
+              }
+              setInterval(togglePropertyImages, 4000);
+          });
+        //});*/
+
+        function showCarousel(ind, which) {
+          let parentCarousel = document.querySelector(`#total-${ind}`)
+          let totalImages = parseInt(parentCarousel.value)
+          let nextButt = document.querySelector(`#next-carousel-butt${ind}`)
+          let prevButt = document.querySelector(`#prev-carousel-butt${ind}`)
+          //let butt = event.currentTarget;
+          let currImage = document.querySelector(`#curr-${ind}`)
+          let currImageInd = currImage.value
+					//alert(currImageInd)
+					var targetInd;
+					if (which == 'prev'){
+						targetInd = parseInt(prevButt.value)
+					}else {
+						targetInd = parseInt(nextButt.value)
+					}
+          //let targetInd = parseInt(butt.value)
+          let prevInd = targetInd - 1
+          let nextInd = targetInd + 1 //< totalImages ? targetInd + 1:totalImages
+          let targetImage = document.querySelector(`#img-${ind}-${targetInd}`)
+					//alert(targetImage)
+          let prevImage = document.querySelector(`#img-${ind}-${currImageInd}`)
+					//alert(4)
+          targetImage.classList.add('active');
+          prevImage.classList.remove('active');
+					targetImage.style.display = "block";
+					prevImage.style.display = "none";
+
+          nextButt.value = nextInd;
+          prevButt.value = prevInd
+          currImage.value = targetInd
+          if (prevInd == 0 ) {
+            prevButt.style.display = "none";
+          }else{
+            prevButt.style.display = "block";
+          }
+          if (nextInd == totalImages + 1) {
+            nextButt.style.display = "none";
+          }else{
+            nextButt.style.display = "block";
+          }
+        }
+    </script>
+</body>
+</html>
