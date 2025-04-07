@@ -1,16 +1,12 @@
+{% extends 'base2.html' %}
 {% load static %}
-{% load static tailwind_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blue Moon Global Services</title>
-		<!--<script src="https://cdn.tailwindcss.com"></script>-->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-		<!-- <link rel="stylesheet" href="{% static 'css/tailwind_out.css' %}" type="text/css" media="screen" title="no title" charset="utf-8"> -->
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-		{% tailwind_css %}
+
+{% block title %}
+    <title>Bluemoon Global Services</title>
+{% endblock title %}
+
+
+{% block style %}
     <style>
         @keyframes carouselAnim {
             0% {
@@ -38,7 +34,7 @@
             display: block;
         }
         .carousel-image, .property-image {
-            transition: display 1s ease-in-out;
+            transition: display 1s;
         }
         .active {
             animation-name:carouselAnim;
@@ -52,46 +48,13 @@
             animation-iteration-count: infinite;
             animation-direction: alternate;
         }
-    </style>
-</head>
-<body class="bg-blue-100">
+    </style>  
+{% endblock style %}
 
-    <!-- Navbar -->
-    <nav class="bg-white text-blue-500 p-4 pb-2 border-b-8 border-solid border-blue-600">
-        <div class="container mx-auto md:fle justify-betwee items-cente">
-            <div class="text-center pl-4">
-                
-                <div class="inline-block relative mx-auto text-center">
-                    <h1 class="text-xl md:text-2xl lg:text-3xl font-black text-center ">Bluemoon Global Services Limited</h1>
-                    <div class="flex justify-center items-center spac-x-4 italic font-serif text-sm md:text-base pl-2 md:pl-4">
-                        <span>Real Estate</span>
-                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
-                        <span>Investment</span>
-                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
-                        <span>Logistics</span>
-                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
-                        <span>Supplies</span>
 
-                    </div>
-                    <span class="absolute right-full top-0 inline-block circle-vary h-14 w-14 lg:h-16 lg:w-16 bg-blue-600 text-white font-bold text-base lg:text-lg"><img src="{% static 'bmg_logo.png' %}" alt=""></span>
-                </div>
-
-            </div>
-            
-            <ul class="hidde flex space-x-3 md:space-x-6 lg:space-x-12 justify-center font-bold text-sm md:text-base pt-2 md:pt-3">
-							<!--<li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Home</a></li>-->
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap">About Us</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Services</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">News</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">FAQs</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap">Contact Us</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Login</a></li>
-            </ul>
-        </div>
-    </nav>
-
+{% block content %}
     <!-- Hero Section with Background Image Carousel -->
-    <div class="relative h-[400px] md:h-[500px]">
+    <div class="relative h-[400px] md:h-[500px] overflow-hidden">
         <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-45 text-white text-center p-6 z-40">
             <div class="text-4xl font-black" id="motto">
 							<p>Building Dreams</p>
@@ -103,7 +66,7 @@
             <!-- <img src="{% static 'images/property1.jpg' %}" class="carousel-image absolute inset-0 w-full h-full object-cover active" alt="Property 1">
             <img src="{% static 'images/property2.jpg' %}" class="carousel-image absolute inset-0 w-full h-full object-cover" alt="Property 2">
             <img src="{% static 'images/property3.jpg' %}" class="carousel-image absolute inset-0 w-full h-full object-cover" alt="Property 3">
-             -->
+             --> 
             {% for image in all_properties %}
             <img src="{% static 'bluemoon_images/' %}{{image}}.jpg" class="carousel-image absolute inset-0 w-full h-full object-cover {% if forloop.first %}active{% endif %}" alt="Property {{forloop.counter}}">
             {% endfor %}
@@ -206,6 +169,34 @@
 			<p class="border-b border-dashed border-gray-400"></p>
 		</div>
 
+    <section>
+        <h2 class="text-3xl font-black text-center mb-6 text-blue-600">Available Properties to Updated Dynamically</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for property in avail_properties %}
+                <div class="bg-white p-4 shadow-lg rounded-lg">
+                    <div class="relative overflow-hidden">
+                        <div class="property-carousel h-64 w-full relative text-center" id="dp{{forloop.counter}}" value="3">
+                          <input type="hidden" name="" value="1" id="curr-d{{forloop.counter}}">
+													<input type="hidden" name="" value="{{property.images|length}}" id="total-d{{forloop.counter}}">
+                            <button onclick="showCarousel('{{forloop.counter}}','prev')" value="0" id="prev-carousel-buttd{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 left-6 top-1/2 z-40 -translate-y-1/2 hidden bg-opacity-50"><i  class="fa-solid fa-arrow-left px-2 text-xl"></i></button>
+                            <button onclick="showCarousel('{{forloop.counter}}', 'next')" value="2" id="next-carousel-buttd{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 right-6 top-1/2 -translate-y-1/2 z-40 bg-opacity-50"><i  class="fa-solid fa-arrow-right px-2 text-xl"></i></button>
+                            {% for property_img in property.images.all %}
+                                <img src="{{ property_img.image.url}}" class="property-image absolute inset-0 w-full h-full object-cover {% if forloop.first %}{% else %}hidden{% endif %}" alt="{{ img }}" id="img-d{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- <h3 class="text-xl font-semibold mt-4">{{ property.title }}</h3>
+                    <p class="text-gray-600">{{ property.description|truncatewords:20 }}</p> -->
+                    <h3 class="text-xl font-semibold mt-4">{{property.title}}</h3>
+                    <div class="text-gray-600 py-1 whitespace-pre-line">{{property.details|safe}}</div>
+                    <p class="text-gray-600 py-1">Category : {{property.get_category_display}}</p>
+                    <p class="text-gray-600 py-1">Status : {{property.get_status_display}}</p>
+                    <p class="text-lg lg:text-xl font-bold text-blue-600">Price : ${{property.price}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
     <!-- News Updates -->
     <section class="py-12">
         <div class="container mx-auto">
@@ -231,30 +222,11 @@
         </div>
 
     </section>
+{% endblock content %}
 
-		<div class="px-8 md:px-12">
-			<p class="border-b border-dashed border-gray-400"></p>
-		</div>
 
-        <!-- Contact Form -->
-        <section class="container mx-auto py-12">
-            <h2 class="text-2xl font-bold text-center mb-6 text-blue-600">Want to Make an Enquiry ?</h2>
-            <form class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto">
-                <input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4">
-                <input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4">
-                <input type="text" placeholder="Phone Number (optional)" class="w-full p-2 border rounded mb-4">
-                <textarea placeholder="Please type your Enquiry here ..." class="w-full p-2 border rounded mb-4"></textarea>
-                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Submit</button>
-            </form>
-        </section>
 
-    
-
-    <!-- Footer -->
-    <footer class="bg-blue-800 text-white text-center py-12 px-4 mt-16">
-        <p>Copyright &copy; 2025 Bluemoon Global Services Limited. All Rights Reserved.</p>
-    </footer>
-
+{% block script %}
     <script>
         // Hero Image Carousel
         let heroImages = document.querySelectorAll('.carousel-image');
@@ -324,5 +296,5 @@
           }
         }
     </script>
-</body>
-</html>
+{% endblock script %}
+

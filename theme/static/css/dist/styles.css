@@ -541,6 +541,9 @@
   .text-nowrap {
     text-wrap: nowrap;
   }
+  .whitespace-pre-line {
+    white-space: pre-line;
+  }
   .text-blue-500 {
     color: var(--color-blue-500);
   }

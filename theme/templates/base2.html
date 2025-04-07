@@ -1,0 +1,82 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% block title %}{% endblock title %}
+		{% block style %}{% endblock style %}
+		{% tailwind_css %}
+	</head>
+
+	<body class="bg-gray-50 font-serif leading-normal tracking-normal">
+		<div class="">
+
+			<!-- Navbar -->
+			<nav class="bg-white text-blue-500 p-4 pb-2 border-b-8 border-solid border-blue-600">
+        <div class="container mx-auto md:fle justify-betwee items-cente">
+            <div class="text-center pl-4">
+                
+                <div class="inline-block relative mx-auto text-center">
+                    <h1 class="text-xl md:text-2xl lg:text-3xl font-black text-center ">Bluemoon Global Services Limited</h1>
+                    <div class="flex justify-center items-center spac-x-4 italic font-serif text-sm md:text-base pl-2 md:pl-4">
+                        <span>Real Estate</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
+                        <span>Investment</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
+                        <span>Logistics</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
+                        <span>Supplies</span>
+
+                    </div>
+                    <span class="absolute right-full top-0 inline-block circle-vary h-14 w-14 lg:h-16 lg:w-16 bg-blue-600 text-white font-bold text-base lg:text-lg"><img src="{% static 'bmg_logo.png' %}" alt=""></span>
+                </div>
+
+            </div>
+            
+            <ul class="hidde flex space-x-3 md:space-x-6 lg:space-x-12 justify-center font-bold text-sm md:text-base pt-2 md:pt-3">
+							<!--<li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Home</a></li>-->
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap">About Us</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Services</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">News</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">FAQs</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap">Contact Us</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+			
+			{% block content %}
+			{% endblock content %}
+
+			<!-- Contact Form -->
+			<section class="container mx-auto py-12">
+				<h2 class="text-2xl font-bold text-center mb-6 text-blue-600">Want to Make an Enquiry ?</h2>
+				<form class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto">
+						<input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4">
+						<input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4">
+						<input type="text" placeholder="Phone Number (optional)" class="w-full p-2 border rounded mb-4">
+						<textarea placeholder="Please type your Enquiry here ..." class="w-full p-2 border rounded mb-4"></textarea>
+						<button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Submit</button>
+				</form>
+			</section>
+
+
+
+			<!-- Footer -->
+			<footer class="bg-blue-800 text-white text-center py-12 px-4 mt-16">
+					<p>Copyright &copy; 2025 Bluemoon Global Services Limited. All Rights Reserved.</p>
+			</footer>
+
+		</div>
+
+		
+		{% block script %}
+			
+		{% endblock script %}
+			
+	</body>
+</html>

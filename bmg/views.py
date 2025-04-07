@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Property
 
 # Create your views here.
 
@@ -7,7 +8,9 @@ def home1(request):
   return render(request, "base.html", {"name":"Richard Amoo"})
 
 def home(request):
+    avail_properties = Property.objects.all()
     context = {
+       "avail_properties":avail_properties,
         "properties": {
             "p1":{
                 "images": ["img" + str(n) for n in range(1,5)]
@@ -28,4 +31,4 @@ def home(request):
 
     }
 
-    return render(request, "bluemoonglobal.html", context)
+    return render(request, "bluemoonglobal2.html", context)
