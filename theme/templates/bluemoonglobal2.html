@@ -134,11 +134,11 @@
 
      </section>
 
-		<div class="px-8 md:px-12">
+		<!-- <div class="px-8 md:px-12">
 			<p class="border-b border-dashed border-gray-400"></p>
 		</div>
 
-    <!-- Property Listings -->
+    
     <section class="container mx-auto py-12">
         <h2 class="text-3xl font-black text-center mb-6 text-blue-600">Available Properties</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -155,33 +155,34 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <!-- <h3 class="text-xl font-semibold mt-4">{{ property.title }}</h3>
-                    <p class="text-gray-600">{{ property.description|truncatewords:20 }}</p> -->
+                    <h3 class="text-xl font-semibold mt-4">{{ property.title }}</h3>
+                    <p class="text-gray-600">{{ property.description|truncatewords:20 }}</p> 
                     <h3 class="text-xl font-semibold mt-4">Title of Property {{forloop.counter}}</h3>
                     <p class="text-gray-600 py-1">Detailed information about the Property will be placed here</p>
                     <p class="text-lg lg:text-xl font-bold text-blue-600">Price : $20,000</p>
                 </div>
             {% endfor %}
         </div>
-    </section>
+    </section> -->
 
 		<div class="px-8 md:px-12">
 			<p class="border-b border-dashed border-gray-400"></p>
 		</div>
 
-    <section>
-        <h2 class="text-3xl font-black text-center mb-6 text-blue-600">Available Properties to Updated Dynamically</h2>
+    <!-- Property Listings -->
+    <section class="container mx-auto py-12">
+        <h2 class="text-3xl font-black text-center mb-6 text-blue-600">Available Properties</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for property in avail_properties %}
                 <div class="bg-white p-4 shadow-lg rounded-lg">
                     <div class="relative overflow-hidden">
-                        <div class="property-carousel h-64 w-full relative text-center" id="dp{{forloop.counter}}" value="3">
-                          <input type="hidden" name="" value="1" id="curr-d{{forloop.counter}}">
-													<input type="hidden" name="" value="{{property.images|length}}" id="total-d{{forloop.counter}}">
-                            <button onclick="showCarousel('{{forloop.counter}}','prev')" value="0" id="prev-carousel-buttd{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 left-6 top-1/2 z-40 -translate-y-1/2 hidden bg-opacity-50"><i  class="fa-solid fa-arrow-left px-2 text-xl"></i></button>
-                            <button onclick="showCarousel('{{forloop.counter}}', 'next')" value="2" id="next-carousel-buttd{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 right-6 top-1/2 -translate-y-1/2 z-40 bg-opacity-50"><i  class="fa-solid fa-arrow-right px-2 text-xl"></i></button>
+                        <div class="property-carousel h-64 w-full relative text-center" id="p{{forloop.counter}}" value="3">
+                          <input type="hidden" name="" value="1" id="curr-{{forloop.counter}}">
+													<input type="hidden" name="" value="{{property.images|length}}" id="total-{{forloop.counter}}">
+                            <button onclick="showCarousel('{{forloop.counter}}','prev')" value="0" id="prev-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 left-6 top-1/2 z-40 -translate-y-1/2 hidden bg-opacity-50"><i  class="fa-solid fa-arrow-left px-2 text-xl"></i></button>
+                            <button onclick="showCarousel('{{forloop.counter}}', 'next')" value="2" id="next-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 right-6 top-1/2 -translate-y-1/2 z-40 bg-opacity-50"><i  class="fa-solid fa-arrow-right px-2 text-xl"></i></button>
                             {% for property_img in property.images.all %}
-                                <img src="{{ property_img.image.url}}" class="property-image absolute inset-0 w-full h-full object-cover {% if forloop.first %}{% else %}hidden{% endif %}" alt="{{ img }}" id="img-d{{forloop.parentloop.counter}}-{{forloop.counter}}">
+                                <img src="{{ property_img.image.url}}" class="property-image absolute inset-0 w-full h-full object-cover {% if forloop.first %}{% else %}hidden{% endif %}" alt="{{ property_img }}" id="img-{{forloop.parentloop.counter}}-{{forloop.counter}}">
                             {% endfor %}
                         </div>
                     </div>
@@ -196,6 +197,10 @@
             {% endfor %}
         </div>
     </section>
+
+    <div class="px-8 md:px-12">
+        <p class="border-b border-dashed border-gray-400"></p>
+    </div>
 
     <!-- News Updates -->
     <section class="py-12">

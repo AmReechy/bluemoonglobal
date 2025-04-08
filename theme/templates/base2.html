@@ -12,7 +12,7 @@
 		{% tailwind_css %}
 	</head>
 
-	<body class="bg-gray-50 font-serif leading-normal tracking-normal">
+	<body class="bg-gray-50 font-sans leading-normal tracking-normal">
 		<div class="">
 
 			<!-- Navbar -->
@@ -38,30 +38,45 @@
             </div>
             
             <ul class="hidde flex space-x-3 md:space-x-6 lg:space-x-12 justify-center font-bold text-sm md:text-base pt-2 md:pt-3">
-							<!--<li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Home</a></li>-->
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap">About Us</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Services</a></li>
+								<li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'home' %}hidden{% endif %}">Home</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'about' %}hidden{% endif %}">About Us</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'service' %}hidden{% endif %}">Services</a></li>
                 <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">News</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">FAQs</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap">Contact Us</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">Login</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'faq' %}hidden{% endif %}">FAQs</a></li>
+                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'contact' %}hidden{% endif %}">Contact Us</a></li>
+								
+                {% if not user.is_authenticated %}
+                <li><a href="{% url 'bmg:login-register' %}" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'login' %}hidden{% endif %}">Login/Register</a></li>
+                {% else %}
+                <li><a href="">Logout</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
+
 			
 			{% block content %}
 			{% endblock content %}
+
+			<div class="px-8 md:px-12">
+				<p class="border-b border-dashed border-gray-400"></p>
+			</div>
 
 			<!-- Contact Form -->
 			<section class="container mx-auto py-12">
 				<h2 class="text-2xl font-bold text-center mb-6 text-blue-600">Want to Make an Enquiry ?</h2>
 				<form class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto">
-						<input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4">
-						<input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4">
-						<input type="text" placeholder="Phone Number (optional)" class="w-full p-2 border rounded mb-4">
-						<textarea placeholder="Please type your Enquiry here ..." class="w-full p-2 border rounded mb-4"></textarea>
-						<button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded w-full">Submit</button>
-				</form>
+                    
+                    {% if not user.is_authenticated %}
+                    <input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4">
+                    <input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4">
+                    <input type="text" placeholder="Phone Number (optional)" class="w-full p-2 border rounded mb-4">
+                    
+                    {% endif %}
+                        
+                    <textarea placeholder="Please type your Enquiry here ..." class="w-full p-2 border rounded mb-4"></textarea>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Submit</button>
+                </form>
 			</section>
 
 

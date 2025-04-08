@@ -1,0 +1,73 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Login or Register</title>
+{% endblock title %}
+
+
+
+{% block content %}
+
+    <div class="text-center font-black text-2xl md:text-3xl bg-blue-600 py-8 mb-10 text-white">
+        <p>Login or Register</p>
+    </div>
+
+    <section class="py-12">
+        
+
+        <div>
+            <div class="text-center font-bold">
+                <p class="text-xl lg:text:2xl text-green-600">Already have an account ?</p>
+                <p class="text-lg lg:text-xl font-black text-blue-500">Please login to your account</p>
+            </div>
+            <form action="{% url 'bmg:login' %}" method="post" class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto">
+                {% csrf_token %}
+
+                {% if login_form.non_field_errors %}
+                    <div>
+                        {% for err in login_form.non_field_errors %}
+                        <p class="text-sm lg:text-base text-red-600 font-bold">{{err}}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div>
+                {% for field in login_form %}
+                    <div>{{ field }}</div>
+                {% endfor %}
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Login</button>
+            </form>
+        </div>
+    </section>
+    
+    <section class="py-12">
+        <div class="text-center font-bold">
+            <p class="text-xl lg:text:2xl text-red-600">Dont't have an account ?</p>
+            <p class="text-lg lg:text-xl font-black text-blue-500">Please create a new Account</p>
+        </div>
+        <div>
+            <form action="{% url 'bmg:login' %}" method="post" class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto cursor-pointer">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div>
+                        {% for err in form.non_field_errors %}
+                        <p class="text-sm lg:text-base text-red-600 font-bold">{{err}}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div>
+                {% for field in form %}
+                    <div>{{ field }}</div>
+                {% endfor %}
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Submit</button>
+            </form>
+        </div>
+    </section>
+    
+{% endblock content %}
+    
