@@ -1,0 +1,26 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Our Services</title>
+{% endblock title %}
+
+
+{% block content %}
+    <div class="py-10 text-center text-3xl lg:text-4xl font-black">
+        <p>Our Services</p>
+    </div>
+    <section class="container mx-auto">
+        <div class="grid-cols-2 md:grid gap-8">
+            
+            {% for service in services %}
+            <div>
+                <div>{{service.title}}</div>
+                <div class="text-lg md:text-xl ">{{ service.details|safe }}</div>
+            </div>
+            {% endfor %}
+                
+        </div>
+        
+    </section>
+{% endblock content %}

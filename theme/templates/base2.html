@@ -41,7 +41,7 @@
                 
                 <div class="inline-block relative mx-auto text-center">
                     <h1 class="text-2xl md:text-4xl lg:text-5xl font-black text-center text-blue-700">Bluemoon Global Services</h1>
-                    <div class="flex justify-center items-center spac-x-4 italic font-serif text-sm md:text-base ">
+                    <div class="flex justify-center items-center spac-x-4 italic font-serif text-sm md:text-base lg:text-lg font-semibold">
                         <span>Real Estate</span>
                         <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
                         <span>Investment</span>
@@ -62,15 +62,15 @@
 						{% endif %}
             
             <ul class="hidde flex space-x-2 md:space-x-6 lg:space-x-12 justify-center font-extrabold text-xs md:text-base py-1 md:pt-3 text-purple-600">
-								<li><a href="/" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'home' %}hidden{% endif %}">Home</a></li>
-                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'about' %}hidden{% endif %}">About Us</a></li>
-                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'service' %}hidden{% endif %}">Services</a></li>
-                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">News</a></li>
-                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'faq' %}hidden{% endif %}">FAQs</a></li>
-                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'contact' %}hidden{% endif %}">Contact Us</a></li>
+				<li class="{% if section == 'home' %}hidden{% endif %}"><a href="/" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 ">Home</a></li>
+                <li class="{% if section == 'about' %}hidden{% endif %}"><a href="{% url 'bmg:about-us' %}" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap ">About Us</a></li>
+                <li class="{% if section == 'service' %}hidden{% endif %}"><a href="{% url 'bmg:services' %}" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 ">Services</a></li>
+                <li class="{% if section == 'news' %}hidden{% endif %}"><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">News</a></li>
+                <li class="{% if section == 'faq' %}hidden{% endif %}"><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 ">FAQs</a></li>
+                <li class="{% if section == 'contact' %}hidden{% endif %}"><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'contact' %}hidden{% endif %}">Contact Us</a></li>
 								
                 {% if not user.is_authenticated %}
-                <li><a href="{% url 'bmg:login-register' %}" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-green-600 {% if section == 'login' %}hidden{% endif %}">Login/Register</a></li>
+                <li class="{% if section == 'login' %}hidden{% endif %}"><a href="{% url 'bmg:login-register' %}" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-green-600 {% if section == 'login' %}hidden{% endif %}">Login/Register</a></li>
                 {% else %}
                 <li><a href="{% url 'bmg:logout' %}" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-red-600">Logout</a></li>
                 {% endif %}

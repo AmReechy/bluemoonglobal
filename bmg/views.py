@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Property
+from .models import Property, AboutUs, Service, News, Faq, CustomUser
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegistrationForm, UserLoginForm
 
@@ -45,18 +45,20 @@ def login_register_user(request):
     section = "login"
     if request.method != 'POST':
         form = UserRegistrationForm()
-        login_form = UserLoginForm()
-
-    else:
+        
+    if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            user.save()
             messages.success(request, "Your Soliss Account was created successfully. You may now log in to your account using your Username and Password.", extra_tags="time-15000")
-            return redirect('bmg:user-login')
+            return redirect('bmg:login')
     
         else:
             messages.error(request, "Sorry, your account was NOT created as the submitted form contains some errors. Please correct the errors and try again.", "time-15000")
-    
+            form.add_error(None, "Error with account creation !")
+
+    login_form = UserLoginForm()
     context = {'form': form, 'login_form':login_form, "section":section,}
 
     return render(request,"login_register.html", context)
@@ -75,9 +77,15 @@ def user_login(request):
                 return redirect('bmg:home')
             else:
                 form.add_error(None, "You entered an invalid username or password!")
+                
+                #return redirect('bmg:user-login')
         else:
+            #form.add_error(None, "There was a problem with your login credentials !")
             messages.error(request, "There was a problem with your login credentials !", extra_tags="time-10000")
-            return redirect('bmg:login-register')
+            #return redirect('bmg:login-register')
+    reg_form = UserRegistrationForm()
+    context = {'form': reg_form, 'login_form':form, "section":'login',}
+    return render(request,"login_register.html", context)
     
 
 def user_logout(request):
@@ -85,6 +93,18 @@ def user_logout(request):
     messages.error(request, "You have logged out of your Account!")
     return redirect('bmg:home')
 
+
+def about_us(request):
+    section = "login"
+    about_us = AboutUs.objects.all().first()
+
+    return render(request, "about_us.html", {'about_us':about_us.about_us, 'section':'about'})
+
+def services(request):
+    section = "service"
+    services = Service.objects.all()
+
+    return render(request, "services.html", {'services':services, 'section':section})
 
 
 
