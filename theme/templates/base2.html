@@ -1,4 +1,3 @@
-{% load static tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -9,20 +8,40 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% block title %}{% endblock title %}
 		{% block style %}{% endblock style %}
-		{% tailwind_css %}
+		<style type="text/css" media="screen">
+			
+        @keyframes textAnim {
+            0% {
+                opacity: 0;
+                transform: scale(.5);
+            } 
+            100% {
+                opacity: 1;
+                transform: scale(1.4);
+            }
+        }
+
+        .text-anim {
+            animation-name: textAnim;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+		</style>
+		<link rel="stylesheet" href="{% static 'css/dist/styles2.css' %}" type="text/css" media="screen" title="no title" charset="utf-8">
 	</head>
 
 	<body class="bg-gray-50 font-sans leading-normal tracking-normal">
 		<div class="">
 
 			<!-- Navbar -->
-			<nav class="bg-white text-blue-500 p-4 pb-2 border-b-8 border-solid border-blue-600">
+			<nav class="bg-white text-blue-600 p-4 pb-2 border-b-8 border-solid border-blue-600">
         <div class="container mx-auto md:fle justify-betwee items-cente">
-            <div class="text-center pl-4">
+            <div class="text-center pl-10 md:pl-0 pt-1 pb-3">
                 
                 <div class="inline-block relative mx-auto text-center">
-                    <h1 class="text-xl md:text-2xl lg:text-3xl font-black text-center ">Bluemoon Global Services Limited</h1>
-                    <div class="flex justify-center items-center spac-x-4 italic font-serif text-sm md:text-base pl-2 md:pl-4">
+                    <h1 class="text-2xl md:text-4xl lg:text-5xl font-black text-center text-blue-700">Bluemoon Global Services</h1>
+                    <div class="flex justify-center items-center spac-x-4 italic font-serif text-sm md:text-base ">
                         <span>Real Estate</span>
                         <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
                         <span>Investment</span>
@@ -32,28 +51,37 @@
                         <span>Supplies</span>
 
                     </div>
-                    <span class="absolute right-full top-0 inline-block circle-vary h-14 w-14 lg:h-16 lg:w-16 bg-blue-600 text-white font-bold text-base lg:text-lg"><img src="{% static 'bmg_logo.png' %}" alt=""></span>
+                    <span class="absolute right-full -top-3 inline-block circle-vary h-16 w-16 md:h-18 md:w-18 lg:h-20 lg:w-20 bg-blue-600 text-white font-bold text-base lg:text-lg"><a href="/"><img src="{% static 'bmg_logo.png' %}" alt=""></a></span>
                 </div>
 
             </div>
+						{% if user.is_authenticated %}
+						<div class="text-center text-xl lg:text-2xl text-black font-bold pb-1 text-purple-600">
+							<p>WELCOME, {{ user.username }}</p>
+						</div>
+						{% endif %}
             
-            <ul class="hidde flex space-x-3 md:space-x-6 lg:space-x-12 justify-center font-bold text-sm md:text-base pt-2 md:pt-3">
-								<li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'home' %}hidden{% endif %}">Home</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'about' %}hidden{% endif %}">About Us</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'service' %}hidden{% endif %}">Services</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">News</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'faq' %}hidden{% endif %}">FAQs</a></li>
-                <li><a href="#" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'contact' %}hidden{% endif %}">Contact Us</a></li>
+            <ul class="hidde flex space-x-2 md:space-x-6 lg:space-x-12 justify-center font-extrabold text-xs md:text-base py-1 md:pt-3 text-purple-600">
+								<li><a href="/" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'home' %}hidden{% endif %}">Home</a></li>
+                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'about' %}hidden{% endif %}">About Us</a></li>
+                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'service' %}hidden{% endif %}">Services</a></li>
+                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">News</a></li>
+                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'faq' %}hidden{% endif %}">FAQs</a></li>
+                <li><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'contact' %}hidden{% endif %}">Contact Us</a></li>
 								
                 {% if not user.is_authenticated %}
-                <li><a href="{% url 'bmg:login-register' %}" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 {% if section == 'login' %}hidden{% endif %}">Login/Register</a></li>
+                <li><a href="{% url 'bmg:login-register' %}" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-green-600 {% if section == 'login' %}hidden{% endif %}">Login/Register</a></li>
                 {% else %}
-                <li><a href="">Logout</a></li>
+                <li><a href="{% url 'bmg:logout' %}" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-red-600">Logout</a></li>
                 {% endif %}
             </ul>
+						<div class="pt-3 pb-1 text-center text-xl md:text-2xl font-black text-red-600">
+							<span><a href="/admin" class="underline underline-offset-2">Admin Panel</a></span>
+						</div>
         </div>
     </nav>
 
+		<div>
 			
 			{% block content %}
 			{% endblock content %}
@@ -88,7 +116,8 @@
 
 		</div>
 
-		
+	
+		{% include "flash_message.html" %}
 		{% block script %}
 			
 		{% endblock script %}

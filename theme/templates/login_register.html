@@ -9,17 +9,22 @@
 
 {% block content %}
 
-    <div class="text-center font-black text-2xl md:text-3xl bg-blue-600 py-8 mb-10 text-white">
-        <p>Login or Register</p>
+    <div class="text-center font-black text-2xl md:text-3xl lg:text-4xl bg-gradient-to-r from-blue-700 to-purple-700 py-12 text-white relative">
+			<div class="absolute inset-0 flex justify-center items-center text-center">
+				<div>
+					
+				<p class="">Login or Register</p>
+				</div>	
+			</div>
     </div>
 
-    <section class="py-12">
+    <section class="container mx-auto my-12">
         
 
         <div>
             <div class="text-center font-bold">
                 <p class="text-xl lg:text:2xl text-green-600">Already have an account ?</p>
-                <p class="text-lg lg:text-xl font-black text-blue-500">Please login to your account</p>
+                <p class="text-lg lg:text-xl text-blue-500 py-1">Please login to your account</p>
             </div>
             <form action="{% url 'bmg:login' %}" method="post" class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto">
                 {% csrf_token %}
@@ -32,7 +37,7 @@
                     </div>
                 {% endif %}
 
-                <div>
+                <div class="w-full">
                 {% for field in login_form %}
                     <div>{{ field }}</div>
                 {% endfor %}
@@ -42,10 +47,10 @@
         </div>
     </section>
     
-    <section class="py-12">
+    <section class=" container mx-auto my-12">
         <div class="text-center font-bold">
-            <p class="text-xl lg:text:2xl text-red-600">Dont't have an account ?</p>
-            <p class="text-lg lg:text-xl font-black text-blue-500">Please create a new Account</p>
+            <p class="text-xl lg:text:2xl text-red-600">Don't have an account ?</p>
+            <p class="text-lg lg:text-xl text-blue-500 py-1">Please create your account</p>
         </div>
         <div>
             <form action="{% url 'bmg:login' %}" method="post" class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto cursor-pointer">
@@ -64,7 +69,7 @@
                     <div>{{ field }}</div>
                 {% endfor %}
                 </div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Submit</button>
+                <button type="submit" class="bg-blue-500 text-white font-semibold px-4 py-2 rounded w-full">Create Account</button>
             </form>
         </div>
     </section>

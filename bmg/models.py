@@ -46,12 +46,19 @@ class Property(models.Model):
     details = RichTextField()
     price = models.DecimalField(max_digits=12, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
+    last_modified_at = models.DateTimeField(auto_now=True)
     is_available = models.BooleanField(default=True)
     category = models.CharField(max_length=50, choices=PROPERTY_CATEGORY_CHOICES, default='APARTMENT')
     status = models.CharField(max_length=50, choices=PROPERTY_STATUS_CHOICES, default='FOR_SALE')
+    added_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
       return self.title
+    
+    class Meta:
+        ordering = ["-last_modified_at"]
+        verbose_name = "Property"
+        verbose_name_plural = "Properties"
 
 
 class PropertyImage(models.Model):
@@ -60,11 +67,17 @@ class PropertyImage(models.Model):
 
     def __str__(self):
       return f"Image for {self.property.title}"
+   
     
 
 class AboutUs(models.Model):
    about_us = RichTextField()
    last_modified_at = models.DateTimeField(auto_now=True)
+
+   class Meta:
+       ordering = ["-last_modified_at"]
+       verbose_name = "About Us"
+       verbose_name_plural = "About Us"
 
 
 class Service(models.Model):
@@ -73,20 +86,46 @@ class Service(models.Model):
    created_at = models.DateTimeField(auto_now_add=True)
    last_modified_at = models.DateTimeField(auto_now=True)
 
+   class Meta:
+       ordering = ["-last_modified_at"]
 
 class News(models.Model):
    title = models.CharField(max_length=128, blank=False)
    details = RichTextField()
    created_at = models.DateTimeField(auto_now_add=True)
    last_modified_at = models.DateTimeField(auto_now=True)
-
+   added_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
+   
+   class Meta:
+       ordering = ["-last_modified_at"]
+       verbose_name = "News"
+       verbose_name_plural = "News"
 
 class Faq(models.Model):
    question = models.TextField()
    answer = RichTextField()
    created_at = models.DateTimeField(auto_now_add=True)
    last_modified_at = models.DateTimeField(auto_now=True)
+   added_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+
+   class Meta:
+       ordering = ["-last_modified_at"]
+       verbose_name = "FAQ"
+       verbose_name_plural = "FAQs"
 
 
+class Enquiry(models.Model):
+    enquiry = models.TextField(max_length=1000)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=20, null=True, blank=True)
+    full_name = models.CharField(max_length=50, null=True, blank=True)
+    user = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.CASCADE)
+    sent_at = models.DateTimeField(auto_now_add=True)
+    responded_to = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-sent_at"]
+        verbose_name = "Enquiry"
+        verbose_name_plural = "Enquiries"
                        
 

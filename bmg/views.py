@@ -8,6 +8,7 @@ from django.contrib import messages
 # Create your views here.
 
 
+#{% load static tailwind_tags %}
 def home1(request):
   return render(request, "base.html", {"name":"Richard Amoo"})
 
@@ -76,12 +77,14 @@ def user_login(request):
                 form.add_error(None, "You entered an invalid username or password!")
         else:
             messages.error(request, "There was a problem with your login credentials !", extra_tags="time-10000")
+            return redirect('bmg:login-register')
     
 
 def user_logout(request):
     logout(request)
     messages.error(request, "You have logged out of your Account!")
     return redirect('bmg:home')
+
 
 
 

@@ -10,10 +10,12 @@
     <style>
         @keyframes carouselAnim {
             0% {
-                opacity: 0.5;
+                opacity: 0.2;
+								width: 0;
             } 
             100% {
                 opacity: 1;
+								width: 100%;
             }
         }
 
@@ -34,11 +36,11 @@
             display: block;
         }
         .carousel-image, .property-image {
-            transition: display 1s;
+            transition: width 1s;
         }
         .active {
             animation-name:carouselAnim;
-            animation-duration: 1.5s;
+            animation-duration: 2s;
             animation-timing-function: ease-in;
 
         }
@@ -56,7 +58,7 @@
     <!-- Hero Section with Background Image Carousel -->
     <div class="relative h-[400px] md:h-[500px] overflow-hidden">
         <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-45 text-white text-center p-6 z-40">
-            <div class="text-4xl font-black" id="motto">
+            <div class="text-4xl font-black text-anim" id="mot">
 							<p>Building Dreams</p>
 							<p class="py-3">And</p>
 							<p>Creating Legacies</p>
@@ -78,7 +80,7 @@
     <section class="container mx-auto py-12">
         <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">Who We Are</h2>
         <div class="px-4 lg:px-8">
-            <div class="bg-gradient-to-br from-blue-600 to-blue-900 text-white text-lg md:text-xl p-5 shadow-lg rounded-lg">
+            <div class="bg-gradient-to-br from-blue-800 to-purple-800 text-white text-lg md:text-xl p-5 shadow-lg rounded-lg">
                 <p class="pb-2"><span class="font-black">Bluemoon Global Services Limited</span> is a diversified company committed to excellence, 
                     innovation, and reliability across multiple industries. With a strong foundation in real estate, 
                     investment, logistics, and supplies, we provide top-tier services that cater to the evolving needs of our clients.
@@ -281,10 +283,10 @@
 					//alert(targetImage)
           let prevImage = document.querySelector(`#img-${ind}-${currImageInd}`)
 					//alert(4)
-          //targetImage.classList.add('active');
-          //prevImage.classList.remove('active');
-					targetImage.style.display = "block";
-					prevImage.style.display = "none";
+          targetImage.classList.add('active');
+          prevImage.classList.remove('active');
+					//targetImage.style.display = "block";
+					//prevImage.style.display = "none";
 
           nextButt.value = nextInd;
           prevButt.value = prevInd

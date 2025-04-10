@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.form-input {
+		@apply w-full p-2 border rounded mb-4
+	}
+	.alert-error, .error {
+		@apply bg-red-200 text-red-700
+	}
+	.success, .alert-success {
+		@apply bg-green-200 text-green-700
+	}
+	.nav-item {
+		@apply px-1 py-1 bg-blue-600 text-white rounded-sm
+	}
+}

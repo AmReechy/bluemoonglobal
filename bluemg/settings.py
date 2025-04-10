@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import platform
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +32,12 @@ ALLOWED_HOSTS = []
 
 # Settings for tailwind integration
 TAILWIND_APP_NAME = 'theme'
-NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+
+SYSTEM_NAME = platform.system()
+if SYSTEM_NAME == "Linux" and "ANDROID_ROOT" in os.environ:
+    pass
+else:
+    NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 
 
 # Application definition
@@ -128,6 +135,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # or the actual folder where your CSS lives
+]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

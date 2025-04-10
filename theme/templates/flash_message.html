@@ -1,0 +1,167 @@
+<div class="fixed z-50 top-0 left-0 w-full">
+  <div class="relative lg:w-4/5 z-40 mx-auto">
+
+    <div class="absolute top-full w-full font-black  text-left font-sans " id="alert-div">
+      {% if messages %}
+			<div class="relative">
+				<button class="close-flash-msg inline-block absolute right-1 top-1 px-2 border-2 border-solid border-black text-black text-base lg:text-lg font-semibold" id="close-flash-message">X</button>
+      <ul>								
+      {% for message in messages %}
+      <li class="message-li {% if message.tags %}{{message.tags}}{% endif %} px-5 pt-6 pb-4 lg:px-8 border border-solid text-lg lg:text-xl transition-opacity duration-1000 opacity-100" data-duration="{{message.tags|default:'duration-5000'}}">{{message}}</li>
+      {% endfor %}
+      </ul>
+			</div>
+      {% endif %}
+    </div>
+
+    <div class="absolute top-full w-full z-50 font-black text-lg lg:text-xl text-left font-sans hidden" id="alert-div-js">
+			<div class="relative" id="js-flash-cont">
+				<button class="close-flash-msg inline-block absolute right-1 top-1 px-2 border-2 border-solid border-black text-black text-base lg:text-lg font-semibold" id="close-flash-js">X</button>
+      <p class="px-4 pt-6 pb-4 lg:px-10 lg:py-6 border border-solid transition-opacity duration-1000 opacity-100" id="flash-msg-display"></p> 
+			</div>
+    </div>
+
+  </div>
+	
+</div>
+
+			<!--NAV TO TOP BUTTON-->
+			<div class="fixed bottom-20 z-30 w-full text-right">
+				<div class="lg:w-4/5 mx-auto pr-6 md:pr-10 text-white hidden" id="nav-up">
+					<button class="inline-block"><span class="circle-vary w-10 h-10 bg-purple-700 inline-block rounded-full"><i class="fa-solid fa-arrow-up"></i></span></button>
+				</div>
+			</div>
+
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		let alertsDiv = document.querySelector("#alert-div");
+		let jsAlertsDiv = document.querySelector("#alert-div-js");
+		let messageLi = document.querySelectorAll(".message-li")[0];
+		let closeFlash = document.querySelectorAll(".close-flash-msg");
+
+		try{var durationClass = [...messageLi.classList].find(cls => cls.startsWith("time-"));}
+		catch{return}
+    let duration = durationClass ? parseInt(durationClass.replace("time-", ""), 10) : 5000;
+
+		// Hide the message after the specified time
+		setTimeout(() => {
+				closeFlash.forEach((cflash) => {cflash.style.display = "none"});
+				messageLi.classList.remove("opacity-100");
+				messageLi.classList.add("opacity-0"); // Add fade-out effect
+				setTimeout(() => {
+					messageLi.remove()
+					alertsDiv.style.display = "none";
+					closeFlash.style.display = "block";
+				}, 1000); // Remove after fade-out
+
+		}, duration);
+
+		closeFlash.forEach((cf) => {cf.addEventListener("click", function() {
+			try {
+			alertsDiv.style.display = "none";
+			}	catch {alert("error caught")};
+			jsAlertsDiv.style.display = "none";
+			})
+		})
+
+	})
+
+  /*setTimeout(function() {
+    let alertsDiv = document.querySelector("#alert-div");
+    //alerts.forEach(alert => alert.style.display = "none");
+    alertsDiv.style.display = "none";
+
+  }, 8000);  // Hide after 5 seconds*/
+
+
+	function showFlashMessage(alertType, msgText, duration=10000) {
+		const msgCont = document.querySelector("#flash-msg-display");
+		const divCont = document.querySelector("#alert-div-js");
+		let closeFlash = document.querySelector("#close-flash-js");
+		closeFlash.addEventListener("click", function() {
+			divCont.style.display = "none";
+		})
+		msgCont.innerHTML = msgText;
+		divCont.style.display = "block";
+		msgCont.classList.add(alertType);
+		setTimeout(function(){
+			closeFlash.style.display = "none";
+			msgCont.classList.remove("opacity-100");
+			msgCont.classList.add("opacity-0"); // Add fade-out effect
+			setTimeout(() => {
+				divCont.style.display = "none";
+				msgCont.classList.remove(alertType)
+				msgCont.classList.add("opacity-100");
+				closeFlash.style.display = "block";
+			}, 1000);
+		}, duration);
+	}
+
+			//CODE TO NAVIGATE BACK UP
+			const navUp = document.querySelector("#nav-up");
+			let lastScrollPosit = window.scrollY;
+			window.addEventListener("scroll", function(){
+				const currentScrollPos = window.scrollY;
+
+				if ( currentScrollPos < lastScrollPosit && currentScrollPos > 250 ){
+					navUp.style.display = "block";
+				}else {
+					navUp.style.display = "none";
+				}
+
+				lastScrollPosit = currentScrollPos;
+				setTimeout(()=>{},1000)
+			})
+			navUp.addEventListener("click", function(){
+				window.scrollTo({ top: 0, behavior: "smooth" });
+			})
+		
+
+			// HIDING AND SHOWING PAGE HEADER
+			let header = document.querySelector(".page-heading");
+			let stickyTit = document.querySelector("#sticky-title");
+			if (!header){
+				//header = document.querySelector("#sticky-home-heading");
+			}
+			let lastScrollPos = window.scrollY;
+			let headerHidden = false;
+			window.addEventListener("scroll", function(){
+				const currentScrollPos = window.scrollY;
+
+				if ( currentScrollPos > lastScrollPos && currentScrollPos > 400){
+					if (header && !headerHidden) {
+						header.style.display = "none";
+						headerHidden = true;
+			 				if (stickyTit) {
+			 						//sticky_header.style.display = "none";
+        stickyTit.style.opacity = "0";
+        stickyTit.style.visibility = "hidden";
+        stickyTit.style.pointerEvents = "none"; // Prevents interaction
+			 				}
+					}
+				}else if ( currentScrollPos < lastScrollPos && currentScrollPos > 200){
+					if (header && headerHidden) {
+						header.style.display = "block";
+						headerHidden = false;
+			 				if (stickyTit) {
+			 						//sticky_header.style.display = "block";
+        stickyTit.style.opacity = "1";
+        stickyTit.style.visibility = "visible";
+        stickyTit.style.pointerEvents = "auto";
+			 				}
+					}
+				}
+
+				lastScrollPos = currentScrollPos;
+				//setTimeout(()=>{},5000);
+			})
+
+	function notImplemented(event, msg){
+		event.preventDefault()
+		showFlashMessage("alert-error", `${msg} IS NOT YET FULLY IMPLEMENTED !`)
+	}
+
+
+			
+</script>
