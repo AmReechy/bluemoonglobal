@@ -76,9 +76,24 @@
         </div>
     </div>
 
+		<!-- Welcome Message -->
+		<section class="container mx-auto text-center pt-12 ">
+
+			<div class="flex flex-col justify-center px-3 font-black">
+				<span class="inline-block bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent text-4xl md:text-5xl" id="">Welcome</span>
+				<span class="inline-block bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent text-4xl md:text-5xl py-2">to</span>
+				<span class="inline-block text-blue-800 b-gradient-to-r from-blue-700 to-purple-700 b-clip-text tex-transparent text-2xl md:text-3xl">Bluemoon Global Services Limited</span>
+			</div>
+			<div class="text-center">
+				<span class="inline-block rounded-full w-max h-max">
+				<img src="{% static 'bmg_logo.png' %}" class="h-32 w-32 md:h-36 md:w-36 inline-block rounded-full" alt="">
+				</span>
+				
+			</div>
+		</section>
     <!-- What we do -->
     <section class="container mx-auto py-12">
-        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">Who We Are</h2>
+			<!--<h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">Who We Are</h2>-->
         <div class="px-4 lg:px-8">
             <div class="bg-gradient-to-br from-blue-800 to-purple-800 text-white text-lg md:text-xl p-5 shadow-lg rounded-lg">
                 <p class="pb-2"><span class="font-black">Bluemoon Global Services Limited</span> is a diversified company committed to excellence, 
@@ -93,13 +108,11 @@
         
     </section>
 
-		<div class="w-3/4 lg:w-3/5 mx-auto">
-			<p class="border-b border-dashed border-gray-400"></p>
-		</div>
+		<div class="separator"></div>
 
     <!-- What we do -->
-     <section class="container mx-auto py-12">
-        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">What We Do</h2>
+     <!--<section class="container mx-auto py-12">
+        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600"><span class="text-grad-bp">What We Do</span></h2>
         <div class="grid md:grid-cols-2 lg:gri-cols-3 gap-6 px-4 lg:px-8 font-semibold">
             <div class="bg-gradient-to-bl from-blue-600 to-blue-900 text-white p-4 shadow-lg rounded-lg">
                 <p class=" text-xl md:text-2xl font-black pb-2 flex space-x-3"><span>&gt;&gt;</span> <span>Real Estate Development and Management</span></p>
@@ -134,7 +147,7 @@
 
         </div>
 
-     </section>
+		 </section>-->
 
 		<!-- <div class="px-8 md:px-12">
 			<p class="border-b border-dashed border-gray-400"></p>
@@ -166,10 +179,37 @@
             {% endfor %}
         </div>
     </section> -->
+    
+		<section class="container mx-auto py-8 px-4 lg:px-8">
+        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6"><span class="text-grad-bp inline-block">What We Do</span></h2>
+        <div class="grid lg:grid-cols-2 gap-6 md:gap-10 font-semibold text-lg md:text-xl">
+					{% for service in services %}
+					<div>
+						<div class="h-56 md:h-64">
+							<input type="hidden" value="{% cycle '1' '2' '3' '4' as val  %}" name="" id=""/>
+							<img src="{% static 'bluemoon_images/img' %}{{val}}.jpg" alt="" class="w-full h-full object-cover"/>
+						</div>
+            <div class="bg-gradient-to-br text-blue-800 p-6 shadow-lg rounded-b-lg flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-purple-100 to-white' %}">
+							<div class="md:pt-1">								
+								<span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-blue-600' 'bg-purple-600' %} rounded-full"></span> 
+							</div>
+							<div>
+								<p class="font-black pb-4 text-xl md:text-2xl ">
+								<span>{{service.title}} </span>
+								</p>
+							<div class="font-semibold">
+								{{ service.details|safe }}
+							</div>
+								
+							</div>
+						</div>
+						
+					</div>
+					{% endfor %}
+    		</div>
+    </section>
 
-		<div class="px-8 md:px-12">
-			<p class="border-b border-dashed border-gray-400"></p>
-		</div>
+		<div class="separator"></div>
 
     <!-- Property Listings -->
     <section class="container mx-auto py-12">
@@ -180,7 +220,7 @@
                     <div class="relative overflow-hidden">
                         <div class="property-carousel h-64 w-full relative text-center" id="p{{forloop.counter}}" value="3">
                           <input type="hidden" name="" value="1" id="curr-{{forloop.counter}}">
-													<input type="hidden" name="" value="{{property.images|length}}" id="total-{{forloop.counter}}">
+													<input type="hidden" name="" value="{{property.images.all.count}}" id="total-{{forloop.counter}}">
                             <button onclick="showCarousel('{{forloop.counter}}','prev')" value="0" id="prev-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 left-6 top-1/2 z-40 -translate-y-1/2 hidden bg-opacity-50"><i  class="fa-solid fa-arrow-left px-2 text-xl"></i></button>
                             <button onclick="showCarousel('{{forloop.counter}}', 'next')" value="2" id="next-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 right-6 top-1/2 -translate-y-1/2 z-40 bg-opacity-50"><i  class="fa-solid fa-arrow-right px-2 text-xl"></i></button>
                             {% for property_img in property.images.all %}
@@ -190,19 +230,20 @@
                     </div>
                     <!-- <h3 class="text-xl font-semibold mt-4">{{ property.title }}</h3>
                     <p class="text-gray-600">{{ property.description|truncatewords:20 }}</p> -->
-                    <h3 class="text-xl font-semibold mt-4">{{property.title}}</h3>
-                    <div class="text-gray-600 py-1 whitespace-pre-line">{{property.details|safe}}</div>
-                    <p class="text-gray-600 py-1">Category : {{property.get_category_display}}</p>
-                    <p class="text-gray-600 py-1">Status : {{property.get_status_display}}</p>
-                    <p class="text-lg lg:text-xl font-bold text-blue-600">Price : ${{property.price}}</p>
+                    <h3 class="text-xl md:text-2xl font-black mt-4"><span class="text-grad-bp">{{property.title}}</span></h3>
+                    <div class="text-gray-600 py-2 whitespace-pre-line text-base md:text-lg">{{property.details|safe}}</div>
+										<div class="text-base md:text-lg font-bold text-grad-bp">
+                    <p class="">Category : {{property.get_category_display}}</p>
+                    <p class="">Status : {{property.get_status_display}}</p>
+                    <p class="text-lg md:text-xl">Price : ${{property.price|floatformat:"-3g"}}</p>
+											
+										</div>
                 </div>
             {% endfor %}
         </div>
     </section>
 
-    <div class="px-8 md:px-12">
-        <p class="border-b border-dashed border-gray-400"></p>
-    </div>
+		<div class="separator"></div>
 
     <!-- News Updates -->
     <section class="py-12">
@@ -282,25 +323,27 @@
           let targetImage = document.querySelector(`#img-${ind}-${targetInd}`)
 					//alert(targetImage)
           let prevImage = document.querySelector(`#img-${ind}-${currImageInd}`)
-					//alert(4)
-          targetImage.classList.add('active');
-          prevImage.classList.remove('active');
-					//targetImage.style.display = "block";
-					//prevImage.style.display = "none";
+          //targetImage.classList.add('active');
+          //prevImage.classList.remove('active');
+					targetImage.style.display = "block";
+					prevImage.style.display = "none";
 
+					//alert(1)
           nextButt.value = nextInd;
           prevButt.value = prevInd
           currImage.value = targetInd
+					//alert(2)
           if (prevInd == 0 ) {
             prevButt.style.display = "none";
           }else{
             prevButt.style.display = "block";
           }
-          if (nextInd == totalImages + 1) {
+          if (nextInd == totalImages + 1 ) {
             nextButt.style.display = "none";
           }else{
             nextButt.style.display = "block";
           }
+					//alert(3)
         }
     </script>
 {% endblock script %}

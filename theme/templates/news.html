@@ -1,39 +1,40 @@
+
 {% extends 'base2.html' %}
 {% load static %}
 
 {% block title %}
-    <title>About Us</title>
+    <title>LATEST News</title>
 {% endblock title %}
 
 
 {% block content %}
     <div class="">
-        <p class="page-head-title">ABOUT BLUEMOON GLOBAL SERVICES LIMITED</p>
+        <p class="page-head-title">LATEST NEWS</p>
     </div>
-    <section class="container mx-auto py-8">
-        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">Who We Are</h2>
-        <div class="text-lg md:text-xl text-blue-800 bg-gradient-to-br from-blue-100 to-purple-100 rounded-md shadow-lg p-6 whitespace-pre-line font-semibold">{{ about_us|safe }}</div>
-    </section>
 
-		<div class="separator"></div>
     <section class="container mx-auto py-8">
-        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">What We Do</h2>
         <div class="grid lg:grid-cols-2 gap-6 font-semibold text-lg md:text-xl">
-					{% for service in services %}
+					{% for new in news %}
             <div class="bg-gradient-to-br text-blue-800 p-6 shadow-lg rounded-md flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-purple-100 to-white' %}">
 							<div class="md:pt-1">								
 								<span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-blue-600' 'bg-purple-600' %} rounded-full"></span> 
 							</div>
 							<div>
 								<p class="font-black pb-4 text-xl md:text-2xl ">
-								<span>{{service.title}} </span>
+								<span>{{new.title}} </span>
 								</p>
 							<div class="font-semibold">
-								{{ service.details|safe }}
+								{{ new.details|safe }}
 							</div>
 								
 							</div>
 						</div>
+					{% empty %}
+					<div class="text-2xl md:text-3xl font-black text-red-600 py-12 px-4 text-center">
+						<div >
+							<p>There are no news at this time.</p>
+						</div>
+					</div>
 					{% endfor %}
     		</div>
     </section>

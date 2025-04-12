@@ -85,9 +85,10 @@ class Service(models.Model):
    details = RichTextField()
    created_at = models.DateTimeField(auto_now_add=True)
    last_modified_at = models.DateTimeField(auto_now=True)
+   position = models.IntegerField(default=10)
 
    class Meta:
-       ordering = ["-last_modified_at"]
+       ordering = ["position", "-last_modified_at"]
 
 class News(models.Model):
    title = models.CharField(max_length=128, blank=False)
@@ -107,9 +108,10 @@ class Faq(models.Model):
    created_at = models.DateTimeField(auto_now_add=True)
    last_modified_at = models.DateTimeField(auto_now=True)
    added_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+   position = models.IntegerField(default=10)
 
    class Meta:
-       ordering = ["-last_modified_at"]
+       ordering = ["position", "-last_modified_at"]
        verbose_name = "FAQ"
        verbose_name_plural = "FAQs"
 
@@ -127,5 +129,13 @@ class Enquiry(models.Model):
         ordering = ["-sent_at"]
         verbose_name = "Enquiry"
         verbose_name_plural = "Enquiries"
+
+
+class Contact(models.Model):
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=20)
+    office_address = models.CharField(max_length=256)
+
+
                        
 

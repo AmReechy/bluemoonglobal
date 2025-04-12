@@ -9,22 +9,17 @@
 
 {% block content %}
 
-    <div class="text-center font-black text-2xl md:text-3xl lg:text-4xl bg-gradient-to-r from-blue-700 to-purple-700 py-12 text-white relative">
-			<div class="absolute inset-0 flex justify-center items-center text-center">
-				<div>
-					
-				<p class="">Login or Register</p>
-				</div>	
-			</div>
-    </div>
+		<div class="">
+			<p class="page-head-title">LOGIN OR REGISTER</p>
+		</div>	
 
-    <section class="container mx-auto my-12">
+    <section class="container mx-auto mt-6">
         
 
         <div>
-            <div class="text-center font-bold">
+            <div class="text-center font-black">
                 <p class="text-xl lg:text:2xl text-green-600">Already have an account ?</p>
-                <p class="text-lg lg:text-xl text-blue-500 py-1">Please login to your account</p>
+                <p class="text-lg lg:text-xl text-blue-600 py-1">Login to your account</p>
             </div>
             <form action="{% url 'bmg:login' %}" method="post" class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto">
                 {% csrf_token %}
@@ -48,9 +43,9 @@
     </section>
     
     <section class=" container mx-auto my-12">
-        <div class="text-center font-bold">
+        <div class="text-center font-black">
             <p class="text-xl lg:text:2xl text-red-600">Don't have an account ?</p>
-            <p class="text-lg lg:text-xl text-blue-500 py-1">Please create your account</p>
+            <p class="text-lg lg:text-xl text-blue-600 py-1">Create an account</p>
         </div>
         <div>
             <form action="{% url 'bmg:login-register' %}" method="post" class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto cursor-pointer">

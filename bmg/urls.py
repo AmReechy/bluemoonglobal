@@ -10,4 +10,8 @@ urlpatterns = [
   path("logout", views.user_logout, name='logout'),
   path("about-us", views.about_us, name="about-us"),
   path("our-services", views.services, name="services"),
+  path("news", views.news, name="news"),
+  path("faqs", views.faqs, name="faqs"),
+  path("enquiry", views.enquiry, name="enquiry"),
+  path("contact-us", views.contact, name="contact"),
 ]

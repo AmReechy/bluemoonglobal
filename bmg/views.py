@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Property, AboutUs, Service, News, Faq, CustomUser
+from .models import Property, AboutUs, Service, News, Faq, CustomUser, Enquiry, Contact
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegistrationForm, UserLoginForm
 
@@ -15,6 +15,7 @@ def home1(request):
 def home(request):
     avail_properties = Property.objects.all()
     section = 'home'
+    services = Service.objects.all()
     context = {
         "section":section,
         "avail_properties":avail_properties,
@@ -34,7 +35,8 @@ def home(request):
             "The Ongoing BLUEMOON GARDENS Project in Asokoro 2 Now Close to Completion",
             "Bluemoon Global Services Limited Received a Prestigious Real Estate Award for Our Outstanding Services",
             "Exciting Updates About Our Logistics and Supplies Services"
-        ]
+        ],
+        "services":services,
 
     }
 
@@ -42,6 +44,9 @@ def home(request):
 
 
 def login_register_user(request):
+    if request.user.is_authenticated:
+        messages.error(request, "You are already logged in!")
+        return redirect('bmg:home')
     section = "login"
     if request.method != 'POST':
         form = UserRegistrationForm()
@@ -97,14 +102,55 @@ def user_logout(request):
 def about_us(request):
     section = "login"
     about_us = AboutUs.objects.all().first()
+    services = Service.objects.all()
 
-    return render(request, "about_us.html", {'about_us':about_us.about_us, 'section':'about'})
+    return render(request, "about_us.html", {'about_us':about_us.about_us,'services':services, 'section':'about'})
+
+def contact(request):
+    section = "contact"
+    contact = Contact.objects.all().first()
+    return render(request, "contact_us.html", {'contact':contact, 'section':section})
 
 def services(request):
     section = "service"
     services = Service.objects.all()
 
     return render(request, "services.html", {'services':services, 'section':section})
+
+
+def news(request):
+    section = "news"
+    news = News.objects.all()
+
+    return render(request, "news.html", {"news":news, "section":section})
+
+def faqs(request):
+    section = "faqs"
+    faqs = Faq.objects.all()
+
+    return render(request, "faqs.html", {"faqs":faqs, "section":section})
+
+
+def enquiry(request):
+    if request.method == "POST":
+        name = request.POST["name"]
+        email = request.POST["email"]
+        phone = request.POST["number"]
+        enquiry = request.POST["enquiry"]
+        user = None
+        print(request.POST)
+        print(name, email, phone, enquiry, sep=" ### ")
+        if request.user.is_authenticated:
+            user = request.user
+        try:
+            new_enquiry = Enquiry.objects.create(full_name=name, email=email, phone_number=phone, enquiry=enquiry, user=user)
+        except:
+            messages.error(request, "Sorry, there was a problem with the submitted form. Please try again!", extra_tags="time-10000")
+            return redirect('bmg:home')
+        
+        messages.success(request, "Your enquiry has been successfully submitted. We will respond to you as promptly as possible. Thank you.", extra_tags="time-10000")
+        return redirect('bmg:home')
+
 
 
 

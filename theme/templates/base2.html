@@ -5,6 +5,7 @@
     
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% block title %}{% endblock title %}
 		{% block style %}{% endblock style %}
@@ -31,78 +32,93 @@
 		<link rel="stylesheet" href="{% static 'css/dist/styles2.css' %}" type="text/css" media="screen" title="no title" charset="utf-8">
 	</head>
 
-	<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+	<body class="bg-gray-100 font-sans leading-normal tracking-normal">
 		<div class="">
 
 			<!-- Navbar -->
-			<nav class="bg-white text-blue-600 p-4 pb-2 border-b-8 border-solid border-blue-600">
+			<nav class=" p-4 pb-2 bg-gradient-to-br from-blue-200 to-white  border-solid border-blue-600">
         <div class="container mx-auto md:fle justify-betwee items-cente">
             <div class="text-center pl-10 md:pl-0 pt-1 pb-3">
                 
                 <div class="inline-block relative mx-auto text-center">
-                    <h1 class="text-2xl md:text-4xl lg:text-5xl font-black text-center text-blue-700">Bluemoon Global Services</h1>
-                    <div class="flex justify-center items-center spac-x-4 italic font-serif text-sm md:text-base lg:text-lg font-semibold">
+									<h1 class="text-2xl md:text-3xl lg:text-4xl font-black text-center text-blue-800">Bluemoon Global Services <!--<span class="none md:inline">Limited</span>--></h1>
+                    <div class="flex justify-center items-center italic font-serif text-sm md:text-base lg:text-lg font-semibold text-blue-800">
                         <span>Real Estate</span>
-                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-1 md:mx-2 text-purple-700">|</span>
                         <span>Investment</span>
-                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-1 md:mx-2 text-purple-700">|</span>
                         <span>Logistics</span>
-                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-2 md:mx-4">|</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-1 md:mx-2 text-purple-700">|</span>
                         <span>Supplies</span>
 
                     </div>
-                    <span class="absolute right-full -top-3 inline-block circle-vary h-16 w-16 md:h-18 md:w-18 lg:h-20 lg:w-20 bg-blue-600 text-white font-bold text-base lg:text-lg"><a href="/"><img src="{% static 'bmg_logo.png' %}" alt=""></a></span>
+                    <div class="absolute right-full -top-3 rounded-full z-30 w-max h-max ">
+											<a href="/">
+												<span class="inline-block rounded-full w-max h-max">
+												<img src="{% static 'bmg_logo.png' %}" class="h-16 w-16 md:h-20 md:w-20 lg:h-20 lg:w-20 inline-block rounded-full" alt="">
+												</span>
+											</a></div>
                 </div>
 
             </div>
 						{% if user.is_authenticated %}
-						<div class="text-center text-xl lg:text-2xl text-black font-bold pb-1 text-purple-600">
-							<p>WELCOME, {{ user.username }}</p>
+						<div class="text-center text-lg lg:text-xl text-black font-black pb-1 text-purple-600 flex justify-center space-x-6 flex-row">
+							<p>WELCOME, {{ user.username }} </p>
+							{% if user.is_staff %}
+							<p class="text-center text-red-600">(
+							<span><a href="/admin" class="underline underline-offset-2">Admin Portal</a></span>
+							<!--<span><a href="/admin" class="underline underline-offset-2">Notifications</a></span>-->
+							)</p>
+							{% endif %}
 						</div>
 						{% endif %}
-            
-            <ul class="hidde flex space-x-2 md:space-x-6 lg:space-x-12 justify-center font-extrabold text-xs md:text-base py-1 md:pt-3 text-purple-600">
-				<li class="{% if section == 'home' %}hidden{% endif %}"><a href="/" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 ">Home</a></li>
-                <li class="{% if section == 'about' %}hidden{% endif %}"><a href="{% url 'bmg:about-us' %}" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap ">About Us</a></li>
-                <li class="{% if section == 'service' %}hidden{% endif %}"><a href="{% url 'bmg:services' %}" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 ">Services</a></li>
-                <li class="{% if section == 'news' %}hidden{% endif %}"><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4">News</a></li>
-                <li class="{% if section == 'faq' %}hidden{% endif %}"><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 ">FAQs</a></li>
-                <li class="{% if section == 'contact' %}hidden{% endif %}"><a href="#" class="nav-item decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-nowrap {% if section == 'contact' %}hidden{% endif %}">Contact Us</a></li>
-								
-                {% if not user.is_authenticated %}
-                <li class="{% if section == 'login' %}hidden{% endif %}"><a href="{% url 'bmg:login-register' %}" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-green-600 {% if section == 'login' %}hidden{% endif %}">Login/Register</a></li>
-                {% else %}
-                <li><a href="{% url 'bmg:logout' %}" class="underline decoration-2 underline-offset-4 hover:scale-125 mr-2 md:mr-4 text-red-600">Logout</a></li>
-                {% endif %}
-            </ul>
-						<div class="pt-3 pb-1 text-center text-xl md:text-2xl font-black text-red-600">
-							<span><a href="/admin" class="underline underline-offset-2">Admin Panel</a></span>
-						</div>
         </div>
     </nav>
+            
+            <ul class="hidde flex space-x-3 md:space-x-8 lg:space-x-10 justify-center font-extrabold text-sm md:text-base lg:text-lg py-3 md:pt-3 bg-gradient-to-r from-blue-800 to-purple-700" id="navs-list">
+				<li class="{% if section == 'home' %}hidden{% endif %}"><a href="/" class="nav-item ">Home</a></li>
+                <li class="{% if section == 'about' %}hidden{% endif %}"><a href="{% url 'bmg:about-us' %}" class="nav-item text-nowrap ">About Us</a></li>
+                <li class="{% if section == 'contact' %}hidden{% endif %}"><a href="{% url 'bmg:contact' %}" class="nav-item text-nowrap">Contact Us</a></li>
+
+								<!--<li class="{% if section == 'service' %}hidden{% endif %}"><a href="{% url 'bmg:services' %}" class="nav-item ">Services</a></li>-->
+                <li class="{% if section == 'faqs' %}hidden{% endif %}"><a href="{% url 'bmg:faqs' %}" class="nav-item ">FAQs</a></li>
+                <li class="{% if section == 'news' %}hidden{% endif %}"><a href="{% url 'bmg:news' %}" class="nav-item ">News</a></li>
+								
+                {% if not user.is_authenticated %}
+                <li class="{% if section == 'login' %}hidden{% endif %}"><a href="{% url 'bmg:login-register' %}" class="nav-item {% if section == 'login' %}hidden{% endif %}">Login/Register</a></li>
+                {% else %}
+                <li><a href="{% url 'bmg:logout' %}" class="nav-item text-red-600">Logout</a></li>
+                {% endif %}
+            </ul>
 
 		<div>
 			
 			{% block content %}
 			{% endblock content %}
 
-			<div class="px-8 md:px-12">
-				<p class="border-b border-dashed border-gray-400"></p>
-			</div>
+		<div class="separator"></div>
 
 			<!-- Contact Form -->
 			<section class="container mx-auto py-12">
 				<h2 class="text-2xl font-bold text-center mb-6 text-blue-600">Want to Make an Enquiry ?</h2>
-				<form class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto">
+				<form class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto" action="{% url 'bmg:enquiry' %}" method="post">
+					{% csrf_token %}
                     
-                    {% if not user.is_authenticated %}
-                    <input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4">
-                    <input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4">
-                    <input type="text" placeholder="Phone Number (optional)" class="w-full p-2 border rounded mb-4">
+                    {% if user.is_authenticated %}
+										<div class="hidden">
+										<input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4" name="name" value="{{user.username}}">
+										<input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4" name="email" value="{{user.email}}">
+										<input type="text" placeholder="Phone Number (optional)" class="w-full p-2 border rounded mb-4" name="number" value="{{user.phone_number}}">
+											
+										</div>
+										{% else %}
+                    <input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4" name="name" value="" required>
+                    <input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4" name="email" required>
+                    <input type="text" placeholder="Phone Number" class="w-full p-2 border rounded mb-4" name="number" required>
                     
                     {% endif %}
                         
-                    <textarea placeholder="Please type your Enquiry here ..." class="w-full p-2 border rounded mb-4"></textarea>
+                    <textarea placeholder="Please type your enquiry here ..." class="w-full p-2 border rounded mb-4" name="enquiry" required></textarea>
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Submit</button>
                 </form>
 			</section>
@@ -110,7 +126,7 @@
 
 
 			<!-- Footer -->
-			<footer class="bg-blue-800 text-white text-center py-12 px-4 mt-16">
+			<footer class="bg-gradient-to-br from-blue-800 to-purple-800 text-white text-center py-12 px-4 mt-16">
 					<p>Copyright &copy; 2025 Bluemoon Global Services Limited. All Rights Reserved.</p>
 			</footer>
 

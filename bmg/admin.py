@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Property, PropertyImage, CustomUser, AboutUs, Service, News, Faq, Enquiry
+from .models import Property, PropertyImage, CustomUser, AboutUs, Service, News, Faq, Enquiry, Contact
 
 class PropertyImageInline(admin.TabularInline):  # or admin.StackedInline
     model = PropertyImage
@@ -45,4 +45,12 @@ class News(admin.ModelAdmin):
     list_display = ("title", "added_by", "created_at")
     list_filter = ("created_at", "added_by")
 
+@admin.register(Contact)
+class Contact(admin.ModelAdmin):
+    list_display = ("email", "phone_number", "office_address")
+
+
+admin.site.site_header = "Bluemoon Global Services Administration"
+admin.site.site_title = "Bluemoonglobal Admin"
+admin.site.index_title = "Welcome to Bluemoon Global Services Admin Portal"
 
