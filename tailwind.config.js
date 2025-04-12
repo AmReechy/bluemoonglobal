@@ -7,7 +7,12 @@ module.exports = {
 		"./static/css/src/*.css",
 	],
   theme: {
-    extend: {},
+		extend: {
+			colors: {
+					navy: '#000080',
+					royal: '#4169e1',
+			}
+		},
   },
   plugins: [],
 }
