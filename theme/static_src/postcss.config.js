@@ -4,4 +4,11 @@ module.exports = {
     "postcss-simple-vars": {},
     "postcss-nested": {}
   },
+//   theme: {
+//     extend: {
+//         colors: {
+//             royal: '#000080',
+//         }
+//     }
+//   }
 }

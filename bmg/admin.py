@@ -3,6 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from .models import Property, PropertyImage, CustomUser, AboutUs, Service, News, Faq, Enquiry, Contact
 
+
 class PropertyImageInline(admin.TabularInline):  # or admin.StackedInline
     model = PropertyImage
     extra = 4  # how many image upload slots to show initially

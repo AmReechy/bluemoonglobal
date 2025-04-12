@@ -7,7 +7,8 @@ from django.contrib import messages
 
 # Create your views here.
 
-
+#000080 navy-blue
+#4169e1 royal-blue
 #{% load static tailwind_tags %}
 def home1(request):
   return render(request, "base.html", {"name":"Richard Amoo"})

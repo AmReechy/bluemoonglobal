@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 
+
 """
 ## Models
 - Users: email, username, password

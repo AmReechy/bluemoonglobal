@@ -12,3 +12,46 @@
 .form-input {
     @apply w-full block p-2 border rounded mb-4
 }
+
+.circle-vary {
+    border-radius: 50%;          /* Makes the shape a circle */
+    vertical-align: middle;      /* Align with surrounding text, if any */
+    display: flex;               /* Enable flexbox for centering */
+    align-items: center;         /* Vertically center the content */
+    justify-content: center;     /* Horizontally center the content */
+}
+
+@layer components {
+	.form-input {
+		@apply w-full p-2 border rounded mb-4
+	}
+	.alert-error, .error {
+		@apply bg-red-200 text-red-700
+	}
+	.success, .alert-success {
+		@apply bg-green-200 text-green-700
+	}
+	#navs-list li {
+		@apply text-center bg-white text-blue-600 rounded-sm
+	}
+	.nav-item {
+		@apply inline-block px-2 md:px-4 py-1 bg-white text-blue-600 rounded-sm
+	}
+	strong {
+		@apply font-black
+	}
+
+	.page-head-title {
+		@apply text-blue-800 tracking-wider text-center py-16 px-6 font-black text-2xl md:text-3xl font-black text-purple-800
+	}
+	.separator {
+		@apply w-3/4 lg:w-3/5 mx-auto border-b border-solid border-blue-300
+	}
+	.text-grad-bp {
+		@apply bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent
+	}
+}
+
+@theme {
+    --color-royal: '#000080';
+}

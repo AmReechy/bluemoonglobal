@@ -31,7 +31,7 @@
 
 					<div class="py-8">
 						<p class="text-center py-1"><span class="font-black text-xl md:text-2xl text-grad-bp">Call Us on Phone :</span> <!--<span><i class="fa-solid fa-arrow-down"></i></span>--></p>
-						<a href="tel:{{contact.phone_number|cut:" "}}">
+						<a href="tel:{{contact.phone_number|cut:' '}}">
 						<p class="flex justify-center space-x-3 items-center text-lg md:text-xl font-bold text-blue-800 max-w-max mx-auto">
 							<span class="circle-vary w-10 h-10 bg-blue-800 border-purple-700 border-solid  rounded-full text-white text-2xl"><i class="fa-solid fa-phone"></i></span>
 						<span>{{contact.phone_number}}</span>
@@ -42,17 +42,15 @@
 
 					<div class="">
 						<p class="text-center py-1"><span class="font-black text-xl md:text-2xl text-grad-bp">Visit Our Office :</span> <!--<span><i class="fa-solid fa-arrow-down"></i></span>--></p>
-						<a href="mailto:{{contact.email}}">
+						
 						<p class="flex justify-center space-x-3 items-center text-lg md:text-xl font-bold text-blue-800 max-w-max mx-auto">
 							<span class="circle-vary w-10 h-10 bg-blue-800 border-purple-700 border-solid  rounded-full text-white text-2xl"><i class="fa-solid fa-location-dot"></i></span>
 						<span>{{contact.email}}</span>
 						</p>
-						</a>
-
+						
 					</div>
 				</div>
 			</div>
     </section>
-
 
 {% endblock content %}

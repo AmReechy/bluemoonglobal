@@ -3,6 +3,7 @@ from . import views
 
 app_name = 'bmg'
 
+
 urlpatterns = [
   path("", views.home, name="home"),
   path("login-register", views.login_register_user, name="login-register"),
