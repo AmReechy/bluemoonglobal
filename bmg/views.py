@@ -48,7 +48,7 @@ def login_register_user(request):
             user = form.save()
             user.save()
             messages.success(request, "Your Soliss Account was created successfully. You may now log in to your account using your Username and Password.", extra_tags="time-15000")
-            return redirect('bmg:login')
+            return redirect('bmg:login-register')
     
         else:
             messages.error(request, "Sorry, your account was NOT created as the submitted form contains some errors. Please correct the errors and try again.", "time-15000")

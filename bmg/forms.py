@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from .models import CustomUser
 
 
+
 class UserRegistrationForm(UserCreationForm):
   username = forms.CharField(
      max_length=20,
@@ -13,8 +14,8 @@ class UserRegistrationForm(UserCreationForm):
      widget=forms.EmailInput(attrs={'class': 'form-input', "placeholder":"provide a valid email ..."})
   )
   phone_number = forms.CharField(
-     required=False,
-     widget=forms.EmailInput(attrs={'class': 'form-input', "placeholder":"your phone number ..."})
+     required=True,
+     widget=forms.TextInput(attrs={'class': 'form-input', "placeholder":"your phone number ..."})
   )
   password1 = forms.CharField(
      widget=forms.PasswordInput(attrs={'class': 'form-input', "placeholder":"provide a strong password ..."})

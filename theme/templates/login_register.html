@@ -25,16 +25,16 @@
                 {% csrf_token %}
 
                 {% if login_form.non_field_errors %}
-                    <div>
+                    <div class="mb-4">
                         {% for err in login_form.non_field_errors %}
-                        <p class="text-sm lg:text-base text-red-600 font-bold">{{err}}</p>
+                        <p class="text-base lg:text-base text-red-600 font-bold">{{err}}</p>
                         {% endfor %}
                     </div>
                 {% endif %}
 
                 <div class="w-full">
                 {% for field in login_form %}
-                    <div>{{ field }}</div>
+                    <div class="mb-4">{{ field }}</div>
                 {% endfor %}
                 </div>
                 <button type="submit" class="bg-blue-600 text-white md:text-lg px-4 py-2 rounded w-full cursor-pointer">Login</button>
@@ -48,23 +48,28 @@
             <p class="text-xl md:text-2xl text-blue-600 py-1 font-bold">Create an account</p>
         </div>
         <div>
-            <form action="{% url 'bmg:login-register' %}" method="post" class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto cursor-pointer">
+            <form action="{% url 'bmg:login-register' %}" method="post" class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto ">
                 {% csrf_token %}
 
                 {% if form.non_field_errors %}
-                    <div>
+                    <div class="mb-4">
                         {% for err in form.non_field_errors %}
-                        <p class="text-sm lg:text-base text-red-600 font-bold">{{err}}</p>
+                        <p class="text-base lg:text-base text-red-600 font-bold">{{err}}</p>
                         {% endfor %}
                     </div>
                 {% endif %}
 
 
-                <div>
+                
                 {% for field in form %}
+                <div class="mb-4">
                     <div>{{ field }}</div>
-                {% endfor %}
+                    {% for error in field.errors %}
+                    <div class="text-sm text-red-600 font-bold pl-3">{{ error }}</div>
+                    {% endfor %}
                 </div>
+                {% endfor %}
+               
                 <button type="submit" class="bg-blue-600 text-white font-semibold px-4 py-2 rounded w-full cursor-pointer">Create Account</button>
             </form>
         </div>

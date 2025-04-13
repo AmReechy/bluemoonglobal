@@ -30,7 +30,7 @@
 
 @layer components {
 	.form-input {
-		@apply w-full p-2 border rounded mb-4
+		@apply w-full p-2 border rounded
 	}
 	.alert-error, .error {
 		@apply bg-red-200 text-red-700

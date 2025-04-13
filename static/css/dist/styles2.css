@@ -433,9 +433,6 @@
   .h-32 {
     height: calc(var(--spacing) * 32);
   }
-  .h-56 {
-    height: calc(var(--spacing) * 56);
-  }
   .h-64 {
     height: calc(var(--spacing) * 64);
   }
@@ -648,9 +645,6 @@
       background-color: color-mix(in oklab, var(--color-gray-700) 40%, transparent);
     }
   }
-  .bg-navy {
-    background-color: var(--color-navy);
-  }
   .bg-purple-600 {
     background-color: var(--color-purple-600);
   }
@@ -738,9 +732,6 @@
   .object-cover {
     object-fit: cover;
   }
-  .p-1 {
-    padding: calc(var(--spacing) * 1);
-  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -824,6 +815,9 @@
   }
   .pl-2 {
     padding-left: calc(var(--spacing) * 2);
+  }
+  .pl-3 {
+    padding-left: calc(var(--spacing) * 3);
   }
   .pl-4 {
     padding-left: calc(var(--spacing) * 4);
@@ -938,14 +932,6 @@
   }
   .text-navy {
     color: var(--color-navy);
-  }
-  .text-navy\/70 {
-    color: color-mix(in srgb, #000080 70%, transparent);
-  }
-  @supports (color: color-mix(in lab, red, red)) {
-    .text-navy\/70 {
-      color: color-mix(in oklab, var(--color-navy) 70%, transparent);
-    }
   }
   .text-navy\/80 {
     color: color-mix(in srgb, #000080 80%, transparent);
@@ -1133,11 +1119,6 @@
   @media (width >= 48rem) {
     .md\:h-36 {
       height: calc(var(--spacing) * 36);
-    }
-  }
-  @media (width >= 48rem) {
-    .md\:h-64 {
-      height: calc(var(--spacing) * 64);
     }
   }
   @media (width >= 48rem) {
@@ -1384,7 +1365,6 @@
 }
 @layer components {
   .form-input {
-    margin-bottom: calc(var(--spacing) * 4);
     width: 100%;
     border-radius: 0.25rem;
     border-style: var(--tw-border-style);
