@@ -83,6 +83,7 @@ class AboutUs(models.Model):
 class Service(models.Model):
    title = models.CharField(max_length=128, blank=False)
    details = RichTextField()
+   image = models.ImageField(upload_to='service_images/', null=True, blank=True)
    created_at = models.DateTimeField(auto_now_add=True)
    last_modified_at = models.DateTimeField(auto_now=True)
    position = models.IntegerField(default=10)
@@ -101,6 +102,19 @@ class News(models.Model):
        ordering = ["-last_modified_at"]
        verbose_name = "News"
        verbose_name_plural = "News"
+
+
+class NewsImage(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='news_images/', null=True, blank=True)
+
+    def __str__(self):
+      return f"News Image : {self.news.title}"
+    
+    class Meta:
+       verbose_name = "News Image"
+       verbose_name_plural = "News Images"
+    
 
 class Faq(models.Model):
    question = models.TextField()

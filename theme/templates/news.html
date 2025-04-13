@@ -13,28 +13,41 @@
     </div>
 
     <section class="container mx-auto py-8">
-        <div class="grid lg:grid-cols-2 gap-6 font-semibold text-lg md:text-xl">
-					{% for new in news %}
-            <div class="bg-gradient-to-b text-navy p-6 shadow-lg rounded-md flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-white to-blue-100' %}" id="news-{{new.id}}">
-							<div class="md:pt-1">								
-								<span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-purple-600' 'bg-purple-600' %} rounded-full"></span> 
-							</div>
-							<div>
-								<p class="font-bold pb-4 text-xl md:text-2xl ">
-								<span>{{new.title}} </span>
-								</p>
-							<div class="whitespace-pre-line text-navy/80">{{ new.details|safe }}</div>
-								
-							</div>
-						</div>
-					{% empty %}
-					<div class="text-2xl md:text-3xl font-black text-red-600 py-12 px-4 text-center">
-						<div >
-							<p>There are no news at this time.</p>
-						</div>
-					</div>
-					{% endfor %}
-    		</div>
+        <div class="grid lg:grid-cols-2 gap-10 font-semibold text-lg md:text-xl">
+			{% for new in news %}
+            <div>
+                <div class="bg-gradient-to-b {% cycle 'from-blue-100 to-white' 'from-white to-blue-100' %} text-navy p-6 shadow-lg rounded-md flex space-x-4 mb-3 " id="news-{{new.id}}">
+                    <div class="md:pt-1">								
+                        <span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-purple-600' 'bg-purple-600' %} rounded-full"></span> 
+                    </div>
+                    <div>
+                        <p class="font-black pb-4 text-xl md:text-2xl ">
+                        <span>{{new.title}} </span>
+                        </p>
+                        <div class=" whitespace-pre-line text-navy/90">{{ new.details|safe }}</div>
+                           
+                    </div>
+                            
+                </div>
+                <div class="flex flex-wrap">
+                                
+                    {% for news_image in new.images.all %}
+                        <div class="w-1/2 p-2">
+                            <img src="{{ news_image.image.url}}" class="h-auto w-full  inline-block" alt="">
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+            {% empty %}
+                <div class="text-2xl md:text-3xl font-black text-red-600 py-12 px-4 text-center">
+                    <div >
+                        <p>There is no news to share with you at this time.</p>
+                    </div>
+                </div>
+            
+            {% endfor %}
+    	</div>
     </section>
 
     

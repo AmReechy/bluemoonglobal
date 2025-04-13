@@ -24,7 +24,7 @@
 
         .text-anim {
             animation-name: textAnim;
-            animation-duration: 3s;
+            animation-duration: 3.5s;
             animation-iteration-count: infinite;
             animation-direction: alternate;
         }
@@ -33,7 +33,7 @@
 	</head>
 
 	<body class="bg-gray-100 font-sans leading-normal tracking-normal">
-		<div class="">
+		
 
 			<!-- Navbar -->
 			<nav class=" p-4 pb-2 bg-gradient-to-br from-blue-200 to-white  border-solid border-blue-600">
@@ -62,11 +62,11 @@
 
             </div>
 						{% if user.is_authenticated %}
-						<div class="text-center text-lg lg:text-xl text-black font-black pb-1 text-purple-600 flex justify-center space-x-6 flex-row">
+						<div class="text-center text-lg lg:text-xl  font-black pb-1 text-purple-600 flex justify-center space-x-6 flex-row">
 							<p>WELCOME, {{ user.username }} </p>
 							{% if user.is_staff %}
 							<p class="text-center text-red-600">(
-							<span><a href="/admin" class="underline underline-offset-2">Admin Portal</a></span>
+							<span><a href="/admin" class="underline underline-offset-2">Admin Panel</a></span>
 							<!--<span><a href="/admin" class="underline underline-offset-2">Notifications</a></span>-->
 							)</p>
 							{% endif %}
@@ -74,8 +74,10 @@
 						{% endif %}
         </div>
     </nav>
+
+        <nav class="sticky top-0 w-full z-50">
             <ul class="hidde flex space-x-3 md:space-x-10 lg:space-x-14 justify-center font-extrabold text-sm md:text-base lg:text-lg py-3 md:pt-3 bg-royal b-gradient-to-r from-navy to-royal" id="navs-list">
-				<li class="{% if section == 'home' %}hidden{% endif %}"><a href="/" class="nav-item ">Home</a></li>
+				<li class="{% if section == 'home' %}hidden{% endif %}"><a href="{% url 'bmg:home' %}" class="nav-item ">Home</a></li>
                 <li class="{% if section == 'about' %}hidden{% endif %}"><a href="{% url 'bmg:about-us' %}" class="nav-item text-nowrap ">About Us</a></li>
                 <li class="{% if section == 'contact' %}hidden{% endif %}"><a href="{% url 'bmg:contact' %}" class="nav-item text-nowrap">Contact Us</a></li>
 
@@ -89,8 +91,9 @@
                 <li><a href="{% url 'bmg:logout' %}" class="nav-item text-red-600">Logout</a></li>
                 {% endif %}
             </ul>
+        </nav>
 
-		<div>
+		
 			
 			{% block content %}
 			{% endblock content %}
@@ -124,7 +127,7 @@
 
 
 			<!-- Footer -->
-			<footer class="bg-navy b-gradient-to-br from-blue-800 to-purple-800 text-white text-center py-12 px-4 mt-16">
+			<footer class="bg-royal b-gradient-to-br from-blue-800 to-purple-800 text-white text-center py-12 px-4 mt-16">
 					<p>Copyright &copy; 2025 Bluemoon Global Services Limited. All Rights Reserved.</p>
 			</footer>
 

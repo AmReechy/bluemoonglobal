@@ -10,12 +10,12 @@
     <style>
         @keyframes carouselAnim {
             0% {
-                opacity: 0.2;
-								width: 0;
+                opacity: 0;
+						
             } 
             100% {
                 opacity: 1;
-								width: 100%;
+					
             }
         }
 
@@ -29,6 +29,16 @@
                 transform: scale(1.4);
             }
         }
+
+        @keyframes shrinkingAnim {
+            0% {
+                opacity: 1;
+            } 
+            100% {
+                opacity: 0;
+            }
+        }
+
         .carousel-image {
             display: none;
         }
@@ -41,14 +51,20 @@
         .active {
             animation-name:carouselAnim;
             animation-duration: 2s;
+            
             animation-timing-function: ease-in;
 
         }
         #motto {
             animation-name: textAnim;
-            animation-duration: 3s;
+            animation-duration: 3.5s;
             animation-iteration-count: infinite;
             animation-direction: alternate;
+        }
+        .out-going {
+            animation-name:shrinkingAnim;
+            animation-duration: 2s;
+            animation-timing-function: ease-in;
         }
     </style>  
 {% endblock style %}
@@ -115,9 +131,9 @@
         <div class="grid lg:grid-cols-2 gap-6 md:gap-10 font-semibold text-lg md:text-xl">
 					{% for service in services %}
 					<div>
-						<div class="h-56 md:h-64">
-							<input type="hidden" value="{% cycle '1' '2' '3' '4' as val  %}" name="" id=""/>
-							<img src="{% static 'bluemoon_images/img' %}{{val}}.jpg" alt="" class="w-full h-full object-cover"/>
+						<div class="h-64 md:h-72">
+							
+							<img src="{{ service.image.url}}" alt="{{ service.image }}" class="w-full h-full object-cover"/>
 						</div>
             <div class="bg-gradient-to-br text-royal p-6 shadow-lg rounded-b-lg flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-white to-blue-100' %}">
 							<div class="md:pt-1">								
@@ -144,7 +160,7 @@
     <!-- Property Listings -->
     <section class="container mx-auto ">
         <h2 class="text-3xl md:text-4xl font-black text-center mb-6 text-navy">Available Properties</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="{% if avail_properties %}grid{% endif %} md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for property in avail_properties %}
                 <div class="bg-white p-4 shadow-lg rounded-lg">
                     <div class="relative overflow-hidden">
@@ -166,9 +182,14 @@
                     <p class="">Category : <span class="text-purple-900 inline-block ml-2">{{property.get_category_display}}</span></p>
                     <p class="">Status : <span class="text-purple-900 inline-block ml-2">{{property.get_status_display}}</span></p>
                     <p class="text-lg md:text-xl">Price : <span class="text-purple-900 inline-block ml-2">${{property.price|floatformat:"-3g"}}</span></p>
+                    <p>{{ property_img.image.url}}</p>
                     <p class="text-center text-green-600 text-lg md:text-xl font-semibold underline underline-offset-2 italic pb-3"><a href="{% url 'bmg:prop-details' property.id %}">View Details</a></p>
 											
 										</div>
+                </div>
+            {% empty %}
+                <div class="py-10 text-center font-black text-red-600 text-xl md:text-2xl">
+                    <p>We have no properties available at this time !</p>
                 </div>
             {% endfor %}
         </div>
@@ -180,7 +201,7 @@
     <section class="">
         <div class="container mx-auto">
             <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-navy">Latest News</h2>
-            <div class="grid lg:grid-cols-2 gap-8">
+            <div class="{% if news_list %}grid{% endif %} lg:grid-cols-2 gap-8">
             {% for news in news_list %}
                 <div class="bg-white p-4 shadow-md rounded-lg mb-4">
 									<div class="flex space-x-3">
@@ -188,10 +209,15 @@
 										<div>
 											
                     <h3 class="text-lg md:text-xl font-bold text-royal pb-3">{{ news.title }}</h3>
-                    <div class="text-navy/70 text-base md:text-lg whitespace-pre-line pb-1">{{news.details|truncatewords_html:30|safe}}</div>
+                    <div class="text-navy/85 text-base md:text-lg whitespace-pre-line pb-1">{{news.details|truncatewords_html:30|safe}}</div>
                     <a href="/news" class="text-royal hover:underline md:text-lg font-semibold">Read More</a>
 										</div>
 									</div>
+                </div>
+
+                {% empty %}
+                <div class="py-10 text-center font-black text-red-600 text-xl md:text-2xl">
+                    <p>There is no news to share with you at this time !</p>
                 </div>
             {% endfor %}
             </div>
@@ -208,11 +234,19 @@
         let heroImages = document.querySelectorAll('.carousel-image');
         let index = 0;
         function toggleHeroImages() {
-            heroImages[index].classList.remove('active');
+            //heroImages[index].classList.remove('active');
+            const prevImage = heroImages[index]
+            prevImage.classList.add('out-going');
             index = (index + 1) % heroImages.length;
-            heroImages[index].classList.add('active');
+            const currImage = heroImages[index]
+            currImage.classList.add('active');
+            
+            setTimeout(function(){
+                prevImage.classList.remove('out-going');
+                prevImage.classList.remove('active');
+            }, 3000)
         }
-        setInterval(toggleHeroImages, 6000);
+        setInterval(toggleHeroImages, 7000);
 
         // Property Image Carousel
         /*

@@ -13,6 +13,9 @@ from django.contrib import messages
 def home1(request):
   return render(request, "base.html", {"name":"Richard Amoo"})
 
+def home0(request):
+    return redirect('bmg:home')
+
 def home(request):
     avail_properties = Property.objects.all()
     section = 'home'

@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     # custome apps,
     'bmg',
     # third-party apps,
-    #'tailwind',
+    'tailwind',
     'theme',
     'ckeditor',
 ]
@@ -124,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Lagos'
 
 USE_I18N = True
 
