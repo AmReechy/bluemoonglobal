@@ -15,17 +15,15 @@
     <section class="container mx-auto py-8">
         <div class="grid lg:grid-cols-2 gap-6 font-semibold text-lg md:text-xl">
 					{% for new in news %}
-            <div class="bg-gradient-to-br text-blue-800 p-6 shadow-lg rounded-md flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-purple-100 to-white' %}">
+            <div class="bg-gradient-to-b text-navy p-6 shadow-lg rounded-md flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-white to-blue-100' %}" id="news-{{new.id}}">
 							<div class="md:pt-1">								
-								<span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-blue-600' 'bg-purple-600' %} rounded-full"></span> 
+								<span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-purple-600' 'bg-purple-600' %} rounded-full"></span> 
 							</div>
 							<div>
-								<p class="font-black pb-4 text-xl md:text-2xl ">
+								<p class="font-bold pb-4 text-xl md:text-2xl ">
 								<span>{{new.title}} </span>
 								</p>
-							<div class="font-semibold">
-								{{ new.details|safe }}
-							</div>
+							<div class="whitespace-pre-line text-navy/80">{{ new.details|safe }}</div>
 								
 							</div>
 						</div>

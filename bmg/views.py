@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Property, AboutUs, Service, News, Faq, CustomUser, Enquiry, Contact
+from .models import Display, Property, AboutUs, Service, News, Faq, CustomUser, Enquiry, Contact
 from django.contrib.auth import authenticate, login, logout
 from .forms import UserRegistrationForm, UserLoginForm
 
@@ -17,32 +17,19 @@ def home(request):
     avail_properties = Property.objects.all()
     section = 'home'
     services = Service.objects.all()
+    news = News.objects.all()[0:5]
+    display = Display.objects.filter(name__icontains="home page animated")[0]
+    display_images = display.images.all()
     context = {
         "section":section,
         "avail_properties":avail_properties,
-        "properties": {
-            "p1":{
-                "images": ["img" + str(n) for n in range(1,5)]
-            },
-            "p2":{
-                "images": ["set2_img" + str(n) for n in range(1,6)]
-            },
-            "p3":{
-                "images": ["set3_img" + str(n) for n in range(1,8)]
-            },
-        },
-        "all_properties":["img" + str(n) for n in range(1,5)] + ["set2_img" + str(n) for n in range(1,6)] + ["set3_img" + str(n) for n in range(1,8)],
-        "news_list": [
-            "The Ongoing BLUEMOON GARDENS Project in Asokoro 2 Now Close to Completion",
-            "Bluemoon Global Services Limited Received a Prestigious Real Estate Award for Our Outstanding Services",
-            "Exciting Updates About Our Logistics and Supplies Services"
-        ],
+        "display_images":display_images,
+        "news_list": news,
         "services":services,
 
     }
 
     return render(request, "bluemoonglobal2.html", context)
-
 
 def login_register_user(request):
     if request.user.is_authenticated:
@@ -152,6 +139,13 @@ def enquiry(request):
         messages.success(request, "Your enquiry has been successfully submitted. We will respond to you as promptly as possible. Thank you.", extra_tags="time-10000")
         return redirect('bmg:home')
 
+
+
+def property_details(request, pk):
+    property = Property.objects.get(pk=pk)
+    print(property)
+
+    return render(request, "prop_details.html", {'property':property})
 
 
 

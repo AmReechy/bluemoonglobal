@@ -3,7 +3,6 @@ from . import views
 
 app_name = 'bmg'
 
-
 urlpatterns = [
   path("", views.home, name="home"),
   path("login-register", views.login_register_user, name="login-register"),
@@ -15,4 +14,6 @@ urlpatterns = [
   path("faqs", views.faqs, name="faqs"),
   path("enquiry", views.enquiry, name="enquiry"),
   path("contact-us", views.contact, name="contact"),
+  path("property-details/<int:pk>", views.property_details, name="prop-details"),
+  
 ]

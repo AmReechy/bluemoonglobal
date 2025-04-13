@@ -41,14 +41,14 @@
             <div class="text-center pl-10 md:pl-0 pt-1 pb-3">
                 
                 <div class="inline-block relative mx-auto text-center">
-									<h1 class="text-2xl md:text-3xl lg:text-4xl font-black text-center text-royal">Bluemoon Global Services <!--<span class="none md:inline">Limited</span>--></h1>
-                    <div class="flex justify-center items-center italic font-serif text-sm md:text-base lg:text-lg font-semibold text-blue-800">
+									<h1 class="text-2xl md:text-3xl lg:text-4xl font-black text-center text-navy tracking-wider px-2">Bluemoon Global Services <!--<span class="none md:inline">Limited</span>--></h1>
+                    <div class="flex justify-center items-center italic font-serif text-sm md:text-base lg:text-lg font-semibold text-royal">
                         <span>Real Estate</span>
-                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-1 md:mx-2 text-purple-700">|</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-1 md:mx-2 text-navy">|</span>
                         <span>Investment</span>
-                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-1 md:mx-2 text-purple-700">|</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-1 md:mx-2 text-navy">|</span>
                         <span>Logistics</span>
-                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-1 md:mx-2 text-purple-700">|</span>
+                        <span class="font-black text-base lg:text-xl not-italic inline-block mx-1 md:mx-2 text-navy">|</span>
                         <span>Supplies</span>
 
                     </div>
@@ -74,7 +74,7 @@
 						{% endif %}
         </div>
     </nav>
-            <ul class="hidde flex space-x-3 md:space-x-8 lg:space-x-10 justify-center font-extrabold text-sm md:text-base lg:text-lg py-3 md:pt-3 bg-gradient-to-r from-blue-800 to-purple-700" id="navs-list">
+            <ul class="hidde flex space-x-3 md:space-x-10 lg:space-x-14 justify-center font-extrabold text-sm md:text-base lg:text-lg py-3 md:pt-3 bg-royal b-gradient-to-r from-navy to-royal" id="navs-list">
 				<li class="{% if section == 'home' %}hidden{% endif %}"><a href="/" class="nav-item ">Home</a></li>
                 <li class="{% if section == 'about' %}hidden{% endif %}"><a href="{% url 'bmg:about-us' %}" class="nav-item text-nowrap ">About Us</a></li>
                 <li class="{% if section == 'contact' %}hidden{% endif %}"><a href="{% url 'bmg:contact' %}" class="nav-item text-nowrap">Contact Us</a></li>
@@ -98,8 +98,8 @@
 		<div class="separator"></div>
 
 			<!-- Contact Form -->
-			<section class="container mx-auto py-12">
-				<h2 class="text-2xl font-bold text-center mb-6 text-blue-600">Want to Make an Enquiry ?</h2>
+			<section class="container mx-auto pb-12">
+				<h2 class="text-2xl md:text-3xl font-black text-center mb-6 text-green-600">Want to Make an Enquiry ?</h2>
 				<form class="bg-white p-6 shadow-md rounded-lg max-w-lg mx-auto" action="{% url 'bmg:enquiry' %}" method="post">
 					{% csrf_token %}
                     
@@ -118,14 +118,13 @@
                     {% endif %}
                         
                     <textarea placeholder="Please type your enquiry here ..." class="w-full p-2 border rounded mb-4" name="enquiry" required></textarea>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Submit</button>
+                    <button type="submit" class="bg-blue-600 text-white md:text-lg font-bold px-4 py-2 rounded w-full">Submit</button>
                 </form>
 			</section>
 
 
-
 			<!-- Footer -->
-			<footer class="bg-gradient-to-br from-blue-800 to-purple-800 text-white text-center py-12 px-4 mt-16">
+			<footer class="bg-navy b-gradient-to-br from-blue-800 to-purple-800 text-white text-center py-12 px-4 mt-16">
 					<p>Copyright &copy; 2025 Bluemoon Global Services Limited. All Rights Reserved.</p>
 			</footer>
 

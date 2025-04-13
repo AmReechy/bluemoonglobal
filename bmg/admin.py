@@ -1,7 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Property, PropertyImage, CustomUser, AboutUs, Service, News, Faq, Enquiry, Contact
+from .models import Property, PropertyImage, CustomUser, AboutUs, Service, News, Faq, Enquiry, Contact, Display, DisplayImage
+
 
 
 class PropertyImageInline(admin.TabularInline):  # or admin.StackedInline
@@ -49,6 +50,16 @@ class News(admin.ModelAdmin):
 @admin.register(Contact)
 class Contact(admin.ModelAdmin):
     list_display = ("email", "phone_number", "office_address")
+
+class DisplayImageInline(admin.TabularInline):  # or admin.StackedInline
+    model = DisplayImage
+    extra = 3  # how many image upload slots to show initially
+
+
+@admin.register(Display)
+class DisplayAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    inlines = [DisplayImageInline]
 
 
 admin.site.site_header = "Bluemoon Global Services Administration"

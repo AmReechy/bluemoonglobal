@@ -8,27 +8,27 @@
 
 {% block content %}
     <div class="">
-        <p class="page-head-title">ABOUT BLUEMOON GLOBAL SERVICES LIMITED</p>
+        <p class="page-head-title">ABOUT US</p>
     </div>
     <section class="container mx-auto py-8">
-        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">Who We Are</h2>
-        <div class="text-lg md:text-xl text-blue-800 bg-gradient-to-br from-blue-100 to-purple-100 rounded-md shadow-lg p-6 whitespace-pre-line font-semibold">{{ about_us|safe }}</div>
+        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-navy">Who We Are</h2>
+        <div class="text-lg md:text-xl text-navy/80 bg-gradient-to-b from-white to-blue-100 rounded-md shadow-lg p-6 whitespace-pre-line">{{ about_us|safe }}</div>
     </section>
 
 		<div class="separator"></div>
     <section class="container mx-auto py-8">
-        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">What We Do</h2>
+        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-navy">What We Do</h2>
         <div class="grid lg:grid-cols-2 gap-6 font-semibold text-lg md:text-xl">
 					{% for service in services %}
-            <div class="bg-gradient-to-br text-blue-800 p-6 shadow-lg rounded-md flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-purple-100 to-white' %}">
+            <div class="bg-gradient-to-b text-blue-800 p-6 shadow-lg rounded-md flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-white to-blue-100' %}">
 							<div class="md:pt-1">								
-								<span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-blue-600' 'bg-purple-600' %} rounded-full"></span> 
+								<span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-purple-600' 'bg-purple-600' %} rounded-full"></span> 
 							</div>
 							<div>
-								<p class="font-black pb-4 text-xl md:text-2xl ">
+								<p class="font-black pb-4 text-xl md:text-2xl text-royal">
 								<span>{{service.title}} </span>
 								</p>
-							<div class="font-semibold">
+							<div class=" text-navy/80">
 								{{ service.details|safe }}
 							</div>
 								

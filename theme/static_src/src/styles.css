@@ -7,7 +7,14 @@
   * If your final CSS file is not being updated after code changes, you may want to broaden or narrow
   * the scope of this path.
   */
+
 @source "../../../**/*.{html,py,js}";
+
+@theme {
+    --color-navy: #000080;
+    --color-royal: #4169E1;
+    
+}
 
 .form-input {
     @apply w-full block p-2 border rounded mb-4
@@ -42,16 +49,14 @@
 	}
 
 	.page-head-title {
-		@apply text-blue-800 tracking-wider text-center py-16 px-6 font-black text-2xl md:text-3xl font-black text-purple-800
+		@apply tracking-wider text-center py-16 px-6 text-2xl md:text-3xl font-black text-purple-800
 	}
 	.separator {
-		@apply w-3/4 lg:w-3/5 mx-auto border-b border-solid border-blue-300
+		@apply w-3/4 lg:w-3/5 my-10 md:my-14 mx-auto border-b border-solid border-blue-300 
 	}
 	.text-grad-bp {
 		@apply bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent
 	}
 }
 
-@theme {
-    --color-royal: '#000080';
-}
+

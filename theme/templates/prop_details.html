@@ -1,0 +1,35 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Property Details</title>
+{% endblock title %}
+
+
+
+{% block content %}
+    <div class="">
+        <p class="page-head-title">PROPERTY DETAILS</p>
+    </div>
+
+    <section class="container mx-auto py-8">
+        <div>
+            <p class="text-center font-black text-navy text-2xl md:text-3xl pb-4">{{ property.title}}</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-x-6 gap-y-10 py-2">
+            {% for property_img in property.images.all %}
+            <div class="rounded-md">
+                <img src="{{ property_img.image.url}}" class=" w-full h-full object-cover " alt="{{ property_img }}" >
+            </div>
+            {% endfor %}
+        </div>
+        <div class="p-4 rounded-lg bg-gradient-to-b from-blue-100 to-white md:w-4/5 mx-auto mt-4 md:mt-6">
+            <div class="whitespace-pre-line text-lg md:text-xl text-navy ">{{property.details|safe}}</div>
+            <div class="pt-8 font-black"><p class="text-xl md:text-2xl text-center"><span class="text-royal">Price</span> <span class="text-purple-800 inline-block mx-3">=</span> <span class="text-royal">${{property.price|floatformat:"-3g"}}</span></p></div>
+        </div>
+
+        
+
+    </section>
+{% endblock content %}
+    

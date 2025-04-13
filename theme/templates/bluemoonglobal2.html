@@ -57,20 +57,20 @@
 {% block content %}
     <!-- Hero Section with Background Image Carousel -->
     <div class="relative h-[400px] md:h-[500px] overflow-hidden">
-        <div class="absolute inset-0 flex justify-center items-center bg-black bg-opacity-45 text-white text-center p-6 z-40">
+        <div class="absolute inset-0 flex justify-center items-center bg-gray-700/40  text-white text-center p-6 z-40">
             <div class="text-4xl font-black text-anim" id="mot">
 							<p>Building Dreams</p>
 							<p class="py-3">And</p>
 							<p>Creating Legacies</p>
 						</div>
         </div>
-        <div class="carousel relative h-full w-full">
+        <div class="carousel relative h-full w-full text-right">
             <!-- <img src="{% static 'images/property1.jpg' %}" class="carousel-image absolute inset-0 w-full h-full object-cover active" alt="Property 1">
             <img src="{% static 'images/property2.jpg' %}" class="carousel-image absolute inset-0 w-full h-full object-cover" alt="Property 2">
             <img src="{% static 'images/property3.jpg' %}" class="carousel-image absolute inset-0 w-full h-full object-cover" alt="Property 3">
              --> 
-            {% for image in all_properties %}
-            <img src="{% static 'bluemoon_images/' %}{{image}}.jpg" class="carousel-image absolute inset-0 w-full h-full object-cover {% if forloop.first %}active{% endif %}" alt="Property {{forloop.counter}}">
+            {% for display_image in display_images %}
+            <img src="{{ display_image.image.url}}" class="carousel-image absolute inset-0 w-full h-full object-cover {% if forloop.first %}active{% endif %}" alt="{{ display_image.image}}">
             {% endfor %}
               
         </div>
@@ -80,9 +80,9 @@
 		<section class="container mx-auto text-center pt-12 ">
 
 			<div class="flex flex-col justify-center px-3 font-black">
-				<span class="inline-block bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent text-4xl md:text-5xl" id="">Welcome</span>
-				<span class="inline-block bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent text-4xl md:text-5xl py-2">to</span>
-				<span class="inline-block text-blue-800 b-gradient-to-r from-blue-700 to-purple-700 b-clip-text tex-transparent text-2xl md:text-3xl">Bluemoon Global Services Limited</span>
+				<span class="inline-block text-purple-800 text-4xl md:text-5xl" id="">Welcome</span>
+				<span class="inline-block text-purple-800 text-4xl md:text-5xl py-2">to</span>
+				<span class="inline-block text-navy b-gradient-to-r from-blue-700 to-purple-700 b-clip-text tex-transparent text-2xl md:text-3xl">Bluemoon Global Services Limited</span>
 			</div>
 			<div class="text-center">
 				<span class="inline-block rounded-full w-max h-max">
@@ -95,7 +95,7 @@
     <section class="container mx-auto py-12">
 			<!--<h2 class="text-3xl lg:text-4xl font-black text-center mb-6 text-blue-600">Who We Are</h2>-->
         <div class="px-4 lg:px-8">
-            <div class="bg-gradient-to-br from-blue-800 to-purple-800 text-white text-lg md:text-xl p-5 shadow-lg rounded-lg">
+            <div class="bg-royal b-gradient-to-br from-blue-800 to-purple-800 text-white text-lg md:text-xl p-5 shadow-lg rounded-lg">
                 <p class="pb-2"><span class="font-black">Bluemoon Global Services Limited</span> is a diversified company committed to excellence, 
                     innovation, and reliability across multiple industries. With a strong foundation in real estate, 
                     investment, logistics, and supplies, we provide top-tier services that cater to the evolving needs of our clients.
@@ -110,8 +110,8 @@
 
 		<div class="separator"></div>
     
-		<section class="container mx-auto py-8 px-4 lg:px-8">
-        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6"><span class="text-grad-bp inline-block">What We Do</span></h2>
+		<section class="container mx-auto px-4 lg:px-8">
+        <h2 class="text-3xl lg:text-4xl font-black text-center mb-6"><span class="tex-grad-bp inline-block text-navy">What We Do</span></h2>
         <div class="grid lg:grid-cols-2 gap-6 md:gap-10 font-semibold text-lg md:text-xl">
 					{% for service in services %}
 					<div>
@@ -119,15 +119,15 @@
 							<input type="hidden" value="{% cycle '1' '2' '3' '4' as val  %}" name="" id=""/>
 							<img src="{% static 'bluemoon_images/img' %}{{val}}.jpg" alt="" class="w-full h-full object-cover"/>
 						</div>
-            <div class="bg-gradient-to-br text-blue-800 p-6 shadow-lg rounded-b-lg flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-purple-100 to-white' %}">
+            <div class="bg-gradient-to-br text-royal p-6 shadow-lg rounded-b-lg flex space-x-4 {% cycle 'from-blue-100 to-white' 'from-white to-blue-100' %}">
 							<div class="md:pt-1">								
-								<span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-blue-600' 'bg-purple-600' %} rounded-full"></span> 
+								<span class="inline-block h-3 w-3 md:h-4 md:w-4 {% cycle 'bg-purple-600' 'bg-purple-600' %} rounded-full"></span> 
 							</div>
 							<div>
 								<p class="font-black pb-4 text-xl md:text-2xl ">
 								<span>{{service.title}} </span>
 								</p>
-							<div class="font-semibold">
+							<div class="font-semibold text-navy/85">
 								{{ service.details|safe }}
 							</div>
 								
@@ -142,8 +142,8 @@
 		<div class="separator"></div>
 
     <!-- Property Listings -->
-    <section class="container mx-auto py-12">
-        <h2 class="text-3xl font-black text-center mb-6 text-blue-600">Available Properties</h2>
+    <section class="container mx-auto ">
+        <h2 class="text-3xl md:text-4xl font-black text-center mb-6 text-navy">Available Properties</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {% for property in avail_properties %}
                 <div class="bg-white p-4 shadow-lg rounded-lg">
@@ -151,8 +151,8 @@
                         <div class="property-carousel h-64 w-full relative text-center" id="p{{forloop.counter}}" value="3">
                           <input type="hidden" name="" value="1" id="curr-{{forloop.counter}}">
 													<input type="hidden" name="" value="{{property.images.all.count}}" id="total-{{forloop.counter}}">
-                            <button onclick="showCarousel('{{forloop.counter}}','prev')" value="0" id="prev-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 left-6 top-1/2 z-40 -translate-y-1/2 hidden bg-opacity-50"><i  class="fa-solid fa-arrow-left px-2 text-xl"></i></button>
-                            <button onclick="showCarousel('{{forloop.counter}}', 'next')" value="2" id="next-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600 text-white px-3 py-2 right-6 top-1/2 -translate-y-1/2 z-40 bg-opacity-50"><i  class="fa-solid fa-arrow-right px-2 text-xl"></i></button>
+                            <button onclick="showCarousel('{{forloop.counter}}','prev')" value="0" id="prev-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600/50 text-white px-3 py-2 left-6 top-1/2 z-40 -translate-y-1/2 hidden bg-opacity-50"><i  class="fa-solid fa-arrow-left px-2 text-xl"></i></button>
+                            <button onclick="showCarousel('{{forloop.counter}}', 'next')" value="2" id="next-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600/50 text-white px-3 py-2 right-6 top-1/2 -translate-y-1/2 z-40 bg-opacity-50"><i  class="fa-solid fa-arrow-right px-2 text-xl"></i></button>
                             {% for property_img in property.images.all %}
                                 <img src="{{ property_img.image.url}}" class="property-image absolute inset-0 w-full h-full object-cover {% if forloop.first %}{% else %}hidden{% endif %}" alt="{{ property_img }}" id="img-{{forloop.parentloop.counter}}-{{forloop.counter}}">
                             {% endfor %}
@@ -160,12 +160,13 @@
                     </div>
                     <!-- <h3 class="text-xl font-semibold mt-4">{{ property.title }}</h3>
                     <p class="text-gray-600">{{ property.description|truncatewords:20 }}</p> -->
-                    <h3 class="text-xl md:text-2xl font-black mt-4"><span class="text-grad-bp">{{property.title}}</span></h3>
-                    <div class="text-gray-600 py-2 whitespace-pre-line text-base md:text-lg">{{property.details|safe}}</div>
-										<div class="text-base md:text-lg font-bold text-grad-bp">
-                    <p class="">Category : {{property.get_category_display}}</p>
-                    <p class="">Status : {{property.get_status_display}}</p>
-                    <p class="text-lg md:text-xl">Price : ${{property.price|floatformat:"-3g"}}</p>
+                    <h3 class="text-xl md:text-2xl font-bold mt-4"><span class="tex-grad-bp text-royal">{{property.title}}</span></h3>
+                    <!-- <div class="text-navy/80 py-2 whitespace-pre-line text-base md:text-lg">{{property.details|safe}}</div> -->
+										<div class="text-base md:text-lg font-bold text-navy ext-grad-bp py-3">
+                    <p class="">Category : <span class="text-purple-900 inline-block ml-2">{{property.get_category_display}}</span></p>
+                    <p class="">Status : <span class="text-purple-900 inline-block ml-2">{{property.get_status_display}}</span></p>
+                    <p class="text-lg md:text-xl">Price : <span class="text-purple-900 inline-block ml-2">${{property.price|floatformat:"-3g"}}</span></p>
+                    <p class="text-center text-green-600 text-lg md:text-xl font-semibold underline underline-offset-2 italic pb-3"><a href="{% url 'bmg:prop-details' property.id %}">View Details</a></p>
 											
 										</div>
                 </div>
@@ -176,27 +177,24 @@
 		<div class="separator"></div>
 
     <!-- News Updates -->
-    <section class="py-12">
+    <section class="">
         <div class="container mx-auto">
-            <h2 class="text-2xl font-bold text-center mb-6 text-blue-600">Latest News</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 text-navy">Latest News</h2>
+            <div class="grid lg:grid-cols-2 gap-8">
             {% for news in news_list %}
                 <div class="bg-white p-4 shadow-md rounded-lg mb-4">
 									<div class="flex space-x-3">
-										<span class="relative top-2"><span class="circle-vary h-3 w-3 bg-blue-600"></span></span>
+										<span class="relative top-2"><span class="circle-vary h-3 w-3 bg-purple-600"></span></span>
 										<div>
 											
-                    <h3 class="text-lg lg:text-xl font-semibold">{{ news }}</h3>
-                    <p class="text-gray-600 text-base lg:text-lg">Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                      Quo commodi doloremque illum repudiandae, excepturi ratione nisi aperiam quaerat 
-                      praesentium impedit quibusdam ex voluptatum facilis non pariatur at corporis mollitia 
-                      cum aliquid! Rem nisi magnam nesciunt repudiandae! Rerum labore necessitatibus recusandae 
-                      accusantium earum, dolorum et in dolores, officiis quisquam excepturi modi.
-                    </p>
-                    <a href="" class="text-blue-600 hover:underline">Read More</a>
+                    <h3 class="text-lg md:text-xl font-bold text-royal pb-3">{{ news.title }}</h3>
+                    <div class="text-navy/70 text-base md:text-lg whitespace-pre-line pb-1">{{news.details|truncatewords_html:30|safe}}</div>
+                    <a href="/news" class="text-royal hover:underline md:text-lg font-semibold">Read More</a>
 										</div>
 									</div>
                 </div>
             {% endfor %}
+            </div>
         </div>
 
     </section>

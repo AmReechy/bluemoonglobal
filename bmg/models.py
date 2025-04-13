@@ -4,7 +4,6 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 
-
 """
 ## Models
 - Users: email, username, password
@@ -138,5 +137,21 @@ class Contact(models.Model):
     office_address = models.CharField(max_length=256)
 
 
+class Display(models.Model):
+    name = models.CharField(max_length=128)
+
+class DisplayImage(models.Model):
+    display = models.ForeignKey(Display, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='display_images_new/')
+    position = models.IntegerField(default=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["position", 'created_at']
+        verbose_name = "Display Image"
+        verbose_name_plural = "Display Images"
+
+    def __str__(self):
+      return f"Image for {self.display.name}"
                        
 
