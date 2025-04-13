@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     # custome apps,
     'bmg',
     # third-party apps,
-    'tailwind',
+    #'tailwind',
     'theme',
     'ckeditor',
 ]
