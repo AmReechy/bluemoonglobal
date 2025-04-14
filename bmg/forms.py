@@ -7,21 +7,26 @@ from .models import CustomUser
 
 class UserRegistrationForm(UserCreationForm):
   username = forms.CharField(
+     label='Username',
      max_length=20,
-     widget=forms.TextInput(attrs={'class': 'form-input', "max_length":"20", "placeholder":"provide a username ..."}),
+     widget=forms.TextInput(attrs={'class': 'form-input', "max_length":"20", "placeholder":"Provide a username ..."}),
   )
   email = forms.CharField(
-     widget=forms.EmailInput(attrs={'class': 'form-input', "placeholder":"provide a valid email ..."})
+     label='Email',
+     widget=forms.EmailInput(attrs={'class': 'form-input', "placeholder":"Provide a valid email ..."})
   )
   phone_number = forms.CharField(
+     label='Phone Number',
      required=True,
-     widget=forms.TextInput(attrs={'class': 'form-input', "placeholder":"your phone number ..."})
+     widget=forms.TextInput(attrs={'class': 'form-input', "placeholder":"Type your phone number ..."})
   )
   password1 = forms.CharField(
-     widget=forms.PasswordInput(attrs={'class': 'form-input', "placeholder":"provide a strong password ..."})
+     label='Password',
+     widget=forms.PasswordInput(attrs={'class': 'form-input', "placeholder":"Provide a strong password ..."})
   )
   password2 = forms.CharField(
-     widget=forms.PasswordInput(attrs={'class': 'form-input', "placeholder":"Confirm your password ..."})
+     label='Password Again',
+     widget=forms.PasswordInput(attrs={'class': 'form-input', "placeholder":"Retype your password ..."})
   )
   class Meta:
     model = CustomUser

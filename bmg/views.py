@@ -145,10 +145,11 @@ def enquiry(request):
 
 
 def property_details(request, pk):
+    section = "detail"
     property = Property.objects.get(pk=pk)
     print(property)
 
-    return render(request, "prop_details.html", {'property':property})
+    return render(request, "prop_details.html", {'property':property, 'section':section})
 
 
 

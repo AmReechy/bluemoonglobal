@@ -76,7 +76,7 @@
     </nav>
 
         <nav class="sticky top-0 w-full z-50">
-            <ul class="hidde flex space-x-3 md:space-x-10 lg:space-x-14 justify-center font-extrabold text-sm md:text-base lg:text-lg py-3 md:pt-3 bg-royal b-gradient-to-r from-navy to-royal" id="navs-list">
+            <ul class="hidde flex space-x-3 md:space-x-10 lg:space-x-14 justify-center font-bold text-sm md:text-base lg:text-lg py-3 md:pt-3 bg-royal b-gradient-to-r from-navy to-royal" id="navs-list">
 				<li class="{% if section == 'home' %}hidden{% endif %}"><a href="{% url 'bmg:home' %}" class="nav-item ">Home</a></li>
                 <li class="{% if section == 'about' %}hidden{% endif %}"><a href="{% url 'bmg:about-us' %}" class="nav-item text-nowrap ">About Us</a></li>
                 <li class="{% if section == 'contact' %}hidden{% endif %}"><a href="{% url 'bmg:contact' %}" class="nav-item text-nowrap">Contact Us</a></li>
@@ -86,7 +86,7 @@
                 <li class="{% if section == 'news' %}hidden{% endif %}"><a href="{% url 'bmg:news' %}" class="nav-item ">News</a></li>
 								
                 {% if not user.is_authenticated %}
-                <li class="{% if section == 'login' %}hidden{% endif %}"><a href="{% url 'bmg:login-register' %}" class="nav-item {% if section == 'login' %}hidden{% endif %}">Login/Register</a></li>
+                <li class="{% if section in 'login detail' %}hidden{% endif %}"><a href="{% url 'bmg:login-register' %}" class="nav-item {% if section == 'login' %}hidden{% endif %}">Login/Register</a></li>
                 {% else %}
                 <li><a href="{% url 'bmg:logout' %}" class="nav-item text-red-600">Logout</a></li>
                 {% endif %}
@@ -94,9 +94,10 @@
         </nav>
 
 		
-			
+		
 			{% block content %}
 			{% endblock content %}
+        
 
 		<div class="separator"></div>
 
@@ -108,18 +109,23 @@
                     
                     {% if user.is_authenticated %}
 										<div class="hidden">
-										<input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4" name="name" value="{{user.username}}">
-										<input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4" name="email" value="{{user.email}}">
+                                            
+										<input type="text" placeholder="Type your full name" class="w-full p-2 border rounded mb-4" name="name" value="{{user.username}}">
+                                        <p class="text-base md:text-lg font-bold text-navy">Email</p>
+										<input type="email" placeholder="Provide a valid email address" class="w-full p-2 border rounded mb-4" name="email" value="{{user.email}}">
 										<input type="text" placeholder="Phone Number (optional)" class="w-full p-2 border rounded mb-4" name="number" value="{{user.phone_number}}">
 											
 										</div>
 										{% else %}
-                    <input type="text" placeholder="Full Name" class="w-full p-2 border rounded mb-4" name="name" value="" required>
-                    <input type="email" placeholder="Email Address" class="w-full p-2 border rounded mb-4" name="email" required>
-                    <input type="text" placeholder="Phone Number" class="w-full p-2 border rounded mb-4" name="number" required>
+                                        <p class="text-base md:text-lg font-bold text-navy">Full Name :</p>
+                    <input type="text" placeholder="Type your full Name" class="w-full p-2 border rounded mb-4" name="name" value="" required>
+                    <p class="text-base md:text-lg font-bold text-navy">Email :</p>
+                    <input type="email" placeholder="Provide a valid email address" class="w-full p-2 border rounded mb-4" name="email" required>
+                    <p class="text-base md:text-lg font-bold text-navy">Phone Number :</p>
+                    <input type="text" placeholder="Type your phone number" class="w-full p-2 border rounded mb-4" name="number" required>
                     
                     {% endif %}
-                        
+                    <p class="text-base md:text-lg font-bold text-navy">Enquiry Details :</p>
                     <textarea placeholder="Please type your enquiry here ..." class="w-full p-2 border rounded mb-4" name="enquiry" required></textarea>
                     <button type="submit" class="bg-blue-600 text-white md:text-lg font-bold px-4 py-2 rounded w-full">Submit</button>
                 </form>
@@ -127,7 +133,7 @@
 
 
 			<!-- Footer -->
-			<footer class="bg-royal b-gradient-to-br from-blue-800 to-purple-800 text-white text-center py-12 px-4 mt-16">
+			<footer class="bg-royal text-white text-center py-8 px-4 mt-16">
 					<p>Copyright &copy; 2025 Bluemoon Global Services Limited. All Rights Reserved.</p>
 			</footer>
 

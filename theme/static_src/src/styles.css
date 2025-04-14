@@ -11,8 +11,11 @@
 @source "../../../**/*.{html,py,js}";
 
 @theme {
-    --color-navy: #000080;
-    --color-royal: #4169E1;
+    --color-navy: #000090;
+    /* --color-navy: var(--color-blue-800); */
+    /* --color-royal: var(--color-blue-800); */
+    /* --color-royal: #4169E1; */
+    --color-royal: #000090;
     
 }
 
@@ -39,10 +42,10 @@
 		@apply bg-green-200 text-green-700
 	}
 	#navs-list li {
-		@apply text-center bg-white text-blue-600 rounded-sm
+		@apply text-center bg-white text-navy rounded-sm
 	}
 	.nav-item {
-		@apply inline-block px-2 md:px-4 py-1 bg-white text-blue-600 rounded-sm
+		@apply inline-block px-2 md:px-4 py-1 bg-white text-navy rounded-sm
 	}
 	strong {
 		@apply font-black

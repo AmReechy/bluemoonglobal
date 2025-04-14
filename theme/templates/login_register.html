@@ -63,10 +63,13 @@
                 
                 {% for field in form %}
                 <div class="mb-4">
-                    <div>{{ field }}</div>
+                    <p class="text-base md:text-lg font-bold text-navy">{{field.label_tag}}</p>
+                    <div>
+                    {{ field }}
                     {% for error in field.errors %}
-                    <div class="text-sm text-red-600 font-bold pl-3">{{ error }}</div>
+                    <p class="text-sm text-red-600 font-bold pl-3">{{ error }}</p>
                     {% endfor %}
+                    </div>
                 </div>
                 {% endfor %}
                
