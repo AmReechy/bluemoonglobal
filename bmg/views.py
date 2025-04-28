@@ -19,12 +19,14 @@ def home0(request):
 def home(request):
     avail_properties = Property.objects.all()
     section = 'home'
+    about = AboutUs.objects.all().first()
     services = Service.objects.all()
     news = News.objects.all()[0:5]
     display = Display.objects.filter(name__icontains="home page animated").first()
     display_images = display.images.all() if display else None
     context = {
         "section":section,
+        "about_us":about,
         "avail_properties":avail_properties,
         "display_images":display_images,
         "news_list": news,
