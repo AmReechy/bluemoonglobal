@@ -177,17 +177,17 @@
                     <p class="text-gray-600">{{ property.description|truncatewords:20 }}</p> -->
                     <h3 class="text-xl md:text-2xl font-black mt-4"><span class="tex-grad-bp text-royal">{{property.title}}</span></h3>
                     <!-- <div class="text-navy/80 py-2 whitespace-pre-line text-base md:text-lg">{{property.details|safe}}</div> -->
-										<div class="text-base md:text-lg font-bold text-navy ext-grad-bp py-3">
+										<div class="text-base md:text-lg font-bold text-navy ext-grad-bp py-4">
 										{% if property.property_type %}
-                    <p class="text-lg md:text-xl flex gap-5"><span class="text-nowrap">Property Type </span> <span class="text-blue-700 ">{{property.property_type}}</span></p>
+                    <p class="text-lg md:text-xl flex gap-5 pb-2"><span class="text-nowrap">Property Type </span> <span class="text-blue-700 ">{{property.property_type}}</span></p>
 										{% endif %}
 										{% if property.property_size %}
-                    <p class="text-lg md:text-xl flex gap-5"><span class="text-nowrap">Property Size </span> <span class="text-blue-700">{{property.property_size}}</span></p>
+                    <p class="text-lg md:text-xl flex gap-5 pb-2"><span class="text-nowrap">Property Size </span> <span class="text-blue-700">{{property.property_size}}</span></p>
 										{% endif %}
 										{% if property.location %}
-                    <p class="text-lg md:text-xl flex gap-5"><span class="text-nowrap">Location </span> <span class="text-blue-700 ">{{property.location }}</span></p>
+                    <p class="text-lg md:text-xl flex gap-5 pb-2"><span class="text-nowrap">Location </span> <span class="text-blue-700 ">{{property.location }}</span></p>
 										{% endif %}
-                    <p class="text-lg md:text-xl flex gap-5"><span class="text-nowrap">Price </span> <span class="text-blue-700">{{property.price}}</span></p>
+                    <p class="text-lg md:text-xl flex gap-5 pb-2"><span class="text-nowrap">Price </span> <span class="text-blue-700">{{property.price}}</span></p>
                     <p class="text-center text-green-600 text-lg md:text-xl font-semibold underline underline-offset-2 italic pb-3 pt-2"><a href="{% url 'bmg:prop-details' property.id %}">View Details</a></p>
 											
 										</div>
