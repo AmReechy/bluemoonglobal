@@ -21,7 +21,7 @@ def home(request):
     section = 'home'
     services = Service.objects.all()
     news = News.objects.all()[0:5]
-    display = Display.objects.filter(name__icontains="home page animated")[0:1]
+    display = Display.objects.filter(name__icontains="home page animated").first()
     display_images = display.images.all() if display else None
     context = {
         "section":section,
