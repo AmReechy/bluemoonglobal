@@ -22,7 +22,7 @@ def home(request):
     services = Service.objects.all()
     news = News.objects.all()[0:5]
     display = Display.objects.filter(name__icontains="home page animated")[0:1]
-    display_images = display.images.all()
+    display_images = display.images.all() if display else None
     context = {
         "section":section,
         "avail_properties":avail_properties,
@@ -129,8 +129,8 @@ def enquiry(request):
         phone = request.POST["number"]
         enquiry = request.POST["enquiry"]
         user = None
-        print(request.POST)
-        print(name, email, phone, enquiry, sep=" ### ")
+        #print(request.POST)
+        #print(name, email, phone, enquiry, sep=" ### ")
         if request.user.is_authenticated:
             user = request.user
         try:
@@ -147,7 +147,7 @@ def enquiry(request):
 def property_details(request, pk):
     section = "detail"
     property = Property.objects.get(pk=pk)
-    print(property)
+    #print(property)
 
     return render(request, "prop_details.html", {'property':property, 'section':section})
 
