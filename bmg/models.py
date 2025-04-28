@@ -44,12 +44,15 @@ class Property(models.Model):
 
     title = models.CharField(max_length=255)
     details = RichTextField()
-    price = models.DecimalField(max_digits=12, decimal_places=2)
+    price = models.CharField(max_length=255)
+    property_type = models.CharField(max_length=255, null=True, blank=True)
+    property_size = models.CharField(max_length=255, null=True, blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     last_modified_at = models.DateTimeField(auto_now=True)
     is_available = models.BooleanField(default=True)
-    category = models.CharField(max_length=50, choices=PROPERTY_CATEGORY_CHOICES, default='APARTMENT')
-    status = models.CharField(max_length=50, choices=PROPERTY_STATUS_CHOICES, default='FOR_SALE')
+    #category = models.CharField(max_length=50, choices=PROPERTY_CATEGORY_CHOICES, default='LAND')
+    #status = models.CharField(max_length=50, choices=PROPERTY_STATUS_CHOICES, default='FOR_SALE')
     added_by = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):

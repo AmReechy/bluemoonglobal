@@ -26,7 +26,7 @@
             } 
             100% {
                 opacity: 1;
-                transform: scale(1.4);
+                transform: scale(4);
             }
         }
 
@@ -73,11 +73,10 @@
 {% block content %}
     <!-- Hero Section with Background Image Carousel -->
     <div class="relative h-[400px] md:h-[500px] overflow-hidden">
-        <div class="absolute inset-0 flex justify-center items-center bg-gray-700/40  text-white text-center p-6 z-40">
-            <div class="text-4xl font-black text-anim" id="mot">
-							<p>Building Dreams</p>
-							<p class="py-3">And</p>
-							<p>Creating Legacies</p>
+        <div class="absolute inset-0 flex justify-center items-center bg-transparent  text-yellow-500 text-center p-6 z-40">
+            <div class="text-4xl font-black text-anim tracking-wider" id="mot">
+							<p class="pb-3 white-shadow">Building</p>
+							<p class="pt-3 white-shadow">Dreams</p>
 						</div>
         </div>
         <div class="carousel relative h-full w-full text-right">
@@ -131,7 +130,7 @@
         <div class="grid lg:grid-cols-2 gap-6 md:gap-10 font-semibold text-lg md:text-xl">
 					{% for service in services %}
 					<div>
-						<div class="h-64 md:h-72">
+						<div class="h-64 md:h-[450px]">
 							
 							<img src="{{ service.image.url}}" alt="{{ service.image }}" class="w-full h-full object-cover"/>
 						</div>
@@ -143,7 +142,7 @@
 								<p class="font-black pb-4 text-xl md:text-2xl ">
 								<span>{{service.title}} </span>
 								</p>
-							<div class="font-semibold text-navy/85">
+							<div class="font-semibold text-blue-700">
 								{{ service.details|safe }}
 							</div>
 								
@@ -160,11 +159,11 @@
     <!-- Property Listings -->
     <section class="container mx-auto ">
         <h2 class="text-3xl md:text-4xl font-black text-center mb-6 text-navy">Available Properties</h2>
-        <div class="{% if avail_properties %}grid{% endif %} md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="{% if avail_properties %}grid{% endif %} lg:grid-cols-2 gap-6">
             {% for property in avail_properties %}
                 <div class="bg-white p-4 shadow-lg rounded-lg">
                     <div class="relative overflow-hidden">
-                        <div class="property-carousel h-64 w-full relative text-center" id="p{{forloop.counter}}" value="3">
+                        <div class="property-carousel h-[300px]  md:h-[350px] w-full relative text-center" id="p{{forloop.counter}}" value="3">
                           <input type="hidden" name="" value="1" id="curr-{{forloop.counter}}">
 													<input type="hidden" name="" value="{{property.images.all.count}}" id="total-{{forloop.counter}}">
                             <button onclick="showCarousel('{{forloop.counter}}','prev')" value="0" id="prev-carousel-butt{{forloop.counter}}" class="absolute bg-blue-600/50 text-white px-3 py-2 left-6 top-1/2 z-40 -translate-y-1/2 hidden bg-opacity-50"><i  class="fa-solid fa-arrow-left px-2 text-xl"></i></button>
@@ -176,14 +175,20 @@
                     </div>
                     <!-- <h3 class="text-xl font-semibold mt-4">{{ property.title }}</h3>
                     <p class="text-gray-600">{{ property.description|truncatewords:20 }}</p> -->
-                    <h3 class="text-xl md:text-2xl font-bold mt-4"><span class="tex-grad-bp text-royal">{{property.title}}</span></h3>
+                    <h3 class="text-xl md:text-2xl font-black mt-4"><span class="tex-grad-bp text-royal">{{property.title}}</span></h3>
                     <!-- <div class="text-navy/80 py-2 whitespace-pre-line text-base md:text-lg">{{property.details|safe}}</div> -->
 										<div class="text-base md:text-lg font-bold text-navy ext-grad-bp py-3">
-                    <p class="">Category : <span class="text-purple-900 inline-block ml-2">{{property.get_category_display}}</span></p>
-                    <p class="">Status : <span class="text-purple-900 inline-block ml-2">{{property.get_status_display}}</span></p>
-                    <p class="text-lg md:text-xl">Price : <span class="text-purple-900 inline-block ml-2">${{property.price|floatformat:"-3g"}}</span></p>
-                    <p>{{ property_img.image.url}}</p>
-                    <p class="text-center text-green-600 text-lg md:text-xl font-semibold underline underline-offset-2 italic pb-3"><a href="{% url 'bmg:prop-details' property.id %}">View Details</a></p>
+										{% if property.property_type %}
+                    <p class="text-lg md:text-xl flex gap-5"><span class="text-nowrap">Property Type </span> <span class="text-blue-700 ">{{property.property_type}}</span></p>
+										{% endif %}
+										{% if property.property_size %}
+                    <p class="text-lg md:text-xl flex gap-5"><span class="text-nowrap">Property Size </span> <span class="text-blue-700">{{property.property_size}}</span></p>
+										{% endif %}
+										{% if property.location %}
+                    <p class="text-lg md:text-xl flex gap-5"><span class="text-nowrap">Location </span> <span class="text-blue-700 ">{{property.location }}</span></p>
+										{% endif %}
+                    <p class="text-lg md:text-xl flex gap-5"><span class="text-nowrap">Price </span> <span class="text-blue-700">{{property.price}}</span></p>
+                    <p class="text-center text-green-600 text-lg md:text-xl font-semibold underline underline-offset-2 italic pb-3 pt-2"><a href="{% url 'bmg:prop-details' property.id %}">View Details</a></p>
 											
 										</div>
                 </div>
@@ -209,8 +214,8 @@
 										<div>
 											
                     <h3 class="text-lg md:text-xl font-bold text-royal pb-3">{{ news.title }}</h3>
-                    <div class="text-navy/85 text-base md:text-lg whitespace-pre-line pb-1">{{news.details|truncatewords_html:30|safe}}</div>
-                    <a href="/news" class="text-royal hover:underline md:text-lg font-semibold">Read More</a>
+                    <div class="text-blue-700 text-base md:text-lg whitespace-pre-line pb-2">{{news.details|truncatewords_html:30|safe}}</div>
+                    <a href="/news" class="text-green-600 hover:underline md:text-lg font-semibold">Read More</a>
 										</div>
 									</div>
                 </div>
@@ -233,6 +238,7 @@
         // Hero Image Carousel
         let heroImages = document.querySelectorAll('.carousel-image');
         let index = 0;
+				const movText = document.querySelector("#mot")
         function toggleHeroImages() {
             //heroImages[index].classList.remove('active');
             const prevImage = heroImages[index]
@@ -245,6 +251,11 @@
                 prevImage.classList.remove('out-going');
                 prevImage.classList.remove('active');
             }, 3000)
+					if (index % 2 == 0){
+						movText.innerHTML = `<p class="pb-2 white-shadow">Building</p><p class="pt-2 white-shadow">Dreams</p>`
+					}else{
+						movText.innerHTML = `<p class="pb-2 white-shadow">Creating</p><p class="pt-2 white-shadow">Legacies</p>`
+					}
         }
         setInterval(toggleHeroImages, 7000);
 

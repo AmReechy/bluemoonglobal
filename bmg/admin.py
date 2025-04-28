@@ -11,10 +11,10 @@ class PropertyImageInline(admin.TabularInline):  # or admin.StackedInline
 
 @admin.register(Property)
 class PropertyAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price', 'is_available', 'category', 'status','created_at', )
+    list_display = ('title', 'price', 'is_available', 'property_type', 'property_size','created_at', )
     inlines = [PropertyImageInline]
     search_fields = ('title',)
-    list_filter = ('created_at', 'price', 'is_available')
+    list_filter = ('created_at','is_available')
 
 
 @admin.register(Enquiry)

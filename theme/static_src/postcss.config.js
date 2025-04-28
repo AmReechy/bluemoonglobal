@@ -1,9 +1,9 @@
-module.exports = {
+/*module.exports = {
   plugins: {
     "@tailwindcss/postcss": {},
     "postcss-simple-vars": {},
     "postcss-nested": {}
-  },
+  },*/
 //   theme: {
 //     extend: {
 //         colors: {
@@ -11,4 +11,11 @@ module.exports = {
 //         }
 //     }
 //   }
+//}
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  }
 }
+
